@@ -39,10 +39,10 @@ export default function OutraPagina() {
   return (
     <main className="relative flex flex-col items-center justify-center h-screen overflow-hidden">
       {/* Imagens de fundo (cabeça e logo) permanecem iguais */}
-      <div className="absolute top-52 left-55 z-10 w-[280px] animate-head-beat-slow">
+      <div className="absolute top-52 left-50 z-10 w-[280px] animate-head-beat-slow">
         <Image src="/circulo-cabeca.png" alt="Gráfico de um rosto" width={800} height={800} style={{ objectFit: 'contain' }} />
       </div>
-      <div className="absolute top-120 left-60 z-10 w-[280px]">
+      <div className="absolute top-120 left-55 z-10 w-[280px]">
         <Image src="/Grupo Rovema.png" alt="Logo do Grupo Rovema" width={240} height={66} style={{ objectFit: 'contain' }} />
       </div>
 
