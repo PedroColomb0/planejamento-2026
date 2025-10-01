@@ -18,13 +18,8 @@ export default function HomePage() {
     >
       <div className="relative w-full h-full max-w-screen-xl mx-auto">
 
-        {/* AJUSTE FINO (PARA BAIXO):
-          1. 'top-1/5' -> 'top-[22%]': Move a imagem um pouquinho para BAIXO em telas pequenas.
-             (O original era 25%, a versão anterior 20%, agora estamos em 22%).
-          2. 'md:top-2/5' -> 'md:top-[43%]': Move a imagem um pouquinho para BAIXO em telas de desktop.
-             (O original era 50%, a versão anterior 40%, agora estamos em 43%).
-        */}
-        <div className="absolute w-1/2 md:w-2/5 top-[22%] -translate-y-1/4 left-1/2 -translate-x-1/2 md:left-0 md:top-[43%] md:-translate-y-1/2 md:translate-x-0 md:-ml-24">
+        {/* ADICIONADO: a classe 'animate-head-beat-slow' para a animação */}
+        <div className="absolute w-1/2 md:w-2/5 top-[22%] -translate-y-1/4 left-1/2 -translate-x-1/2 md:left-0 md:top-[43%] md:-translate-y-1/2 md:translate-x-0 md:-ml-24 animate-head-beat-slow">
           <Image 
             src="/circulo-cabeca.png"
             alt="Gráfico de um rosto com ícones de tecnologia"
@@ -34,7 +29,7 @@ export default function HomePage() {
           />
         </div>
 
-        {/* O container do texto permanece como estava no ajuste anterior */}
+        {/* O container do texto permanece inalterado */}
         <div className="absolute w-full px-4 top-2/3 -translate-y-2/3 md:top-1/2 md:-translate-y-1/2 md:left-1/4 md:w-2/3 z-10">
           <div className="flex flex-col items-center md:items-start">
             

@@ -1,33 +1,55 @@
 @import "tailwindcss";
 
 body {
-  /* Define uma cor de fundo para o caso da imagem demorar a carregar */
   background-color: #0c1017;
   color: white;
-  /* Garante que não haverá barras de rolagem na página */
   overflow: hidden; 
 }
 
-/* Classe customizada para a sombra do texto. */
 .text-shadow-lg {
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
 
-/* Definição da animação de pulsação */
+/* Animação de pulsação original (mantida) */
 @keyframes pulse {
-  /* No início e no fim da animação, a imagem tem seu tamanho normal */
   0%, 100% {
     transform: scale(1);
     opacity: 1;
   }
-  /* Na metade da animação, a imagem aumenta um pouquinho (3%) */
   50% {
     transform: scale(1.03);
     opacity: 0.95;
   }
 }
 
-/* Classe que aplica a animação de forma lenta e infinita */
 .animate-pulse-slow {
   animation: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* NOVA ANIMAÇÃO: 'head-beat' para simular uma cabeça batendo
+   Ela combina um pequeno aumento de escala com um leve movimento vertical
+   para dar a sensação de um "balançar" ou "bater".
+*/
+@keyframes head-beat {
+  0%, 100% {
+    transform: scale(1) translateY(0px); /* Tamanho normal e posição original */
+    filter: brightness(100%); /* Brilho normal */
+  }
+  25% {
+    transform: scale(1.01) translateY(-3px); /* Levemente maior e 3px para cima */
+    filter: brightness(105%); /* Leve aumento de brilho */
+  }
+  50% {
+    transform: scale(1.02) translateY(0px); /* Um pouco maior e retorna à posição Y original */
+    filter: brightness(110%); /* Mais brilho */
+  }
+  75% {
+    transform: scale(1.01) translateY(3px); /* Levemente maior e 3px para baixo */
+    filter: brightness(105%); /* Volta a ter um pouco menos brilho */
+  }
+}
+
+/* Aplica a nova animação de forma lenta e infinita */
+.animate-head-beat-slow {
+  animation: head-beat 4s ease-in-out infinite; /* 4 segundos, suave, infinito */
 }
