@@ -3,11 +3,7 @@
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import AnimacaoOrbital from "@/components/AnimacaoOrbital";
-// O componente PlacaSuperior não é mais necessário, mas podemos deixar o import caso use no futuro.
-import PlacaSuperior from "@/components/PlacaSuperior"; 
 import DetalheItem from "@/components/DetalheItem";
-// O import do Link não é mais necessário aqui.
-// import Link from "next/link"; 
 
 export default function OutraPagina() {
   const [itemSelecionado, setItemSelecionado] = useState<string | null>(null);
@@ -16,6 +12,7 @@ export default function OutraPagina() {
   const labelsExternos = ["VEÍCULOS", "ENERGIA", "CONSÓRCIO", "LOCADORA"];
 
   return (
+    // VOLTAMOS PARA O ORIGINAL: 'items-center justify-center' para centralizar tudo.
     <main className="flex flex-col items-center justify-center h-screen p-4 overflow-hidden">
       <div className="relative">
 
@@ -28,13 +25,6 @@ export default function OutraPagina() {
             />
           ) : (
             <motion.div key="orbital">
-              {/* 1. REMOVIDO: O bloco de código abaixo, que mostrava a PlacaSuperior, foi removido.
-              
-                <div className="absolute -top-28 left-1/2 -translate-x-1/2 z-20">
-                  <PlacaSuperior />
-                </div>
-              */}
-
               <AnimacaoOrbital
                 imagemCentral="/robo.png"
                 itensOrbitaInterna={labelsInternos}
@@ -45,19 +35,6 @@ export default function OutraPagina() {
           )}
         </AnimatePresence>
 
-        {/* 2. REMOVIDO: O bloco de código que renderizava o botão "Voltar ao Início" foi completamente removido daqui.
-        
-          {!itemSelecionado && (
-            <div className="absolute -bottom-20 left-1/2 -translate-x-1/2">
-              <Link
-                href="/"
-                className="..."
-              >
-                Voltar ao Início
-              </Link>
-            </div>
-          )}
-        */}
       </div>
     </main>
   );
