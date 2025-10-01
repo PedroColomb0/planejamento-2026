@@ -8,9 +8,26 @@ body {
   overflow: hidden; 
 }
 
-/* Classe customizada para a sombra do texto.
-  Tailwind já tem `text-shadow`, mas criar uma classe te dá mais controle.
-*/
+/* Classe customizada para a sombra do texto. */
 .text-shadow-lg {
   text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+/* Definição da animação de pulsação */
+@keyframes pulse {
+  /* No início e no fim da animação, a imagem tem seu tamanho normal */
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  /* Na metade da animação, a imagem aumenta um pouquinho (3%) */
+  50% {
+    transform: scale(1.03);
+    opacity: 0.95;
+  }
+}
+
+/* Classe que aplica a animação de forma lenta e infinita */
+.animate-pulse-slow {
+  animation: pulse 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

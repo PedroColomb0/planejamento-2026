@@ -1,61 +1,62 @@
+"use client";
+
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 export default function HomePage() {
+  const router = useRouter();
+
+  const handleNavigate = () => {
+    router.push('/outra-pagina');
+  };
+
   return (
-    // Container principal:
-    // - `relative`: Essencial para posicionar os elementos filhos (logo e círculo).
-    // - `flex`, `items-center`, `justify-center`: Centraliza o bloco de texto principal.
-    // - `h-screen`: Garante que o container ocupe 100% da altura da tela.
-    // - `overflow-hidden`: Impede a criação de barras de rolagem.
     <main 
-      className="relative flex flex-col items-center justify-center h-screen overflow-hidden bg-cover bg-center"
-      style={{ backgroundImage: "url('/background-stars.jpg')" }} // <-- Troque pelo seu arquivo de fundo
+      className="relative flex items-center justify-center h-screen overflow-hidden bg-cover bg-center cursor-pointer"
+      style={{ backgroundImage: "url('/background-stars.jpg')" }}
+      onClick={handleNavigate}
     >
-      {/* IMAGEM 1: Círculo com a cabeça
-        - `absolute`: Permite posicionar a imagem livremente dentro do container `main`.
-        - `left-0`: Alinha a imagem à esquerda.
-        - `top-1/2 -translate-y-1/2`: Um truque para centralizar verticalmente a imagem.
-        - `z-10`: Garante que a imagem fique sobre o fundo.
-        - `w-1/3`, `max-w-xs`: Controla o tamanho da imagem para ser responsiva.
-      */}
-      <div className="absolute left-0 md:left-10 lg:left-20 top-1/2 -translate-y-1/2 z-10 w-1/3 max-w-xs md:max-w-sm lg:max-w-md">
-        <Image 
-          src="/circulo-cabeca.png" // <-- Troque pelo seu arquivo PNG do círculo
-          alt="Gráfico de um rosto com ícones de tecnologia"
-          width={500}
-          height={500}
-          style={{ objectFit: 'contain' }}
-        />
-      </div>
-      
-      {/* Conteúdo de Texto Central
-        - `z-20`: Garante que o texto fique na frente de todos os outros elementos.
-      */}
-      <div className="z-20 text-center text-white">
-        
-        {/* Texto Principal */}
-        <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-wider text-shadow-lg">
-          Do Desafio à Oportunidade
-        </h1>
+      <div className="relative w-full h-full max-w-screen-xl mx-auto">
 
-        {/* Subtexto */}
-        <p className="mt-4 text-xl md:text-2xl font-light uppercase tracking-[.25em] text-yellow-400">
-          Diretrizes
-        </p>
-      </div>
+        <div className="absolute w-1/2 md:w-2/5 top-1/4 -translate-y-1/4 left-1/2 -translate-x-1/2 md:left-0 md:top-1/2 md:-translate-y-1/2 md:translate-x-0">
+          <Image 
+            src="/circulo-cabeca.png"
+            alt="Gráfico de um rosto com ícones de tecnologia"
+            width={800}
+            height={800}
+            style={{ objectFit: 'contain' }}
+          />
+        </div>
 
-      {/* IMAGEM 2: Logo do Grupo Rovema
-        - `absolute`: Permite posicionar a imagem livremente.
-        - `bottom-10 right-10`: Posiciona a logo a 10 unidades de distância da borda inferior e direita.
-        - `z-10`: Garante que a logo fique sobre o fundo.
-      */}
-      <div className="absolute bottom-10 right-10 z-10">
-        <Image 
-          src="/Grupo Rovema.png" // <-- Troque pelo seu arquivo PNG da logo
-          alt="Logo do Grupo Rovema" 
-          width={180} 
-          height={50} 
-        />
+        <div className="absolute w-full px-4 top-2/3 -translate-y-2/3 md:top-1/2 md:-translate-y-1/2 md:left-1/3 md:w-2/3 z-10">
+          {/* O container agora tem items-center para mobile e items-start para desktop */}
+          <div className="flex flex-col items-center md:items-start">
+            
+            {/* Título Principal */}
+            {/* CORRIGIDO: Adicionado o "À" de volta ao título */}
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold uppercase tracking-wider text-shadow-lg text-center md:text-left">
+              DO DESAFIO À <br /> OPORTUNIDADE
+            </h1>
+
+            {/* Subtítulo */}
+            {/* CORRIGIDO: A cor amarela foi restaurada */}
+            <p className="mt-4 text-lg md:text-xl font-light uppercase tracking-[.25em] text-yellow-400">
+              Diretrizes
+            </p>
+
+            {/* Logo Rovema */}
+            {/* AJUSTE: Aumentada e movida para a direita em telas de desktop com 'md:self-end' */}
+            <div className="mt-8 md:self-end">
+               <Image 
+                src="/Grupo Rovema.png"
+                alt="Logo do Grupo Rovema" 
+                width={240} // AJUSTE: Logo um pouco maior
+                height={66}
+              />
+            </div>
+          </div>
+        </div>
+
       </div>
     </main>
   );
