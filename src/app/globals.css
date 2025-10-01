@@ -1,7 +1,16 @@
 @import "tailwindcss";
 
 body {
-  background-color: #0d1117;
+  /* Define uma cor de fundo para o caso da imagem demorar a carregar */
+  background-color: #0c1017;
   color: white;
-  overflow: hidden; /* Adicione esta linha */
+  /* Garante que não haverá barras de rolagem na página */
+  overflow: hidden; 
+}
+
+/* Classe customizada para a sombra do texto.
+  Tailwind já tem `text-shadow`, mas criar uma classe te dá mais controle.
+*/
+.text-shadow-lg {
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.7);
 }
