@@ -15,8 +15,9 @@ export default function AnimacaoOrbital({ imagemCentral, itensDaOrbita }: Props)
   const tempo = useMotionValue(0);
 
   useEffect(() => {
+    // ... (código do useEffect continua o mesmo)
     const animation = animate(tempo, 360, {
-      duration: 60, // AINDA MAIS LENTO: Aumentado de 40 para 60 segundos
+      duration: 60,
       repeat: Infinity,
       ease: "linear",
     });
@@ -27,23 +28,27 @@ export default function AnimacaoOrbital({ imagemCentral, itensDaOrbita }: Props)
 
   return (
     <div className="relative flex items-center justify-center w-[350px] h-[450px]">
-      {/* --- ÍCONE CENTRAL COM EFEITO PULSANTE --- */}
+      
+      {/* --- ÍCONE CENTRAL ATUALIZADO --- */}
       <motion.div
-        className="z-10 flex items-center justify-center w-[100px] h-[100px] rounded-full border border-cyan-400/50"
+        className="z-10"
+        // Novo efeito de brilho pulsante usando drop-shadow, que funciona bem em PNGs
         animate={{
-          boxShadow: [
-            "0 0 20px rgba(56, 189, 248, 0.4)",
-            "0 0 30px rgba(56, 189, 248, 0.7)",
-            "0 0 20px rgba(56, 189, 248, 0.4)",
-          ],
+          filter: [
+            "drop-shadow(0 0 10px rgba(56, 189, 248, 0.5))",
+            "drop-shadow(0 0 20px rgba(56, 189, 248, 0.8))",
+            "drop-shadow(0 0 10px rgba(56, 189, 248, 0.5))",
+          ]
         }}
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       >
-        <Image src={imagemCentral} width={60} height={60} alt="Ícone Central" />
+        {/* Imagem maior e sem a 'cápsula' de borda */}
+        <Image src={imagemCentral} width={120} height={120} alt="Ícone Central" />
       </motion.div>
 
-      {/* --- CÁPSULAS DE INFORMAÇÃO ORBITANDO --- */}
+      {/* --- CÁPSULAS DE INFORMAÇÃO ORBITANDO (código inalterado) --- */}
       {itensDaOrbita.map((texto, index) => {
+        // ... (o código de mapeamento das bolas continua exatamente o mesmo)
         const anguloInicial = (index / numBolas) * 360;
         const angulo = useTransform(tempo, (t) => t + anguloInicial);
         const x = useTransform(angulo, (a) => raioHorizontal * Math.cos(a * (Math.PI / 180)));
