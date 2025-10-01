@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { AnimatePresence, useMotionValue, animate, MotionValue } from "framer-motion";
+import { AnimatePresence, motion, useMotionValue, animate } from "framer-motion";
 import Image from "next/image";
 import AnimacaoOrbital from "@/components/AnimacaoOrbital";
 import DetalheItem from "@/components/DetalheItem";
@@ -9,7 +9,6 @@ import { dadosHierarquicos } from "@/data/dados";
 
 export default function OutraPagina() {
   const [hierarquia, setHierarquia] = useState<string[]>([]);
-
   const tempoAnimacao = useRef(useMotionValue(0)).current;
 
   useEffect(() => {
@@ -18,13 +17,12 @@ export default function OutraPagina() {
       repeat: Infinity,
       ease: "linear",
     });
-
     return () => animation.stop();
   }, [tempoAnimacao]);
 
   const labelsInternos = ["MKT", "NPS", "CRM", "EVENTOS", "DADOS", "UX", "BI", "VENDAS"];
   const labelsExternos = ["VEÍCULOS", "ENERGIA", "CONSÓRCIO", "LOCADORA"];
-
+  
   const itemAtual = hierarquia.length > 0 ? hierarquia[hierarquia.length - 1] : null;
   const subItensAtuais = itemAtual ? dadosHierarquicos[itemAtual] || [] : [];
 
@@ -38,7 +36,7 @@ export default function OutraPagina() {
 
   return (
     <main className="relative flex flex-col items-center justify-center h-screen overflow-hidden">
-      {/* Imagens de fundo (cabeça e logo) permanecem iguais */}
+      {/* Imagens de fundo */}
       <div className="absolute top-52 left-50 z-10 w-[280px] animate-head-beat-slow">
         <Image src="/circulo-cabeca.png" alt="Gráfico de um rosto" width={800} height={800} style={{ objectFit: 'contain' }} />
       </div>
@@ -48,8 +46,29 @@ export default function OutraPagina() {
 
       {/* Conteúdo Interativo */}
       <div className="relative w-full h-full flex items-center justify-center z-20">
-        <AnimatePresence mode="wait">
-          {itemAtual ? (
+        
+        {/* Wrapper que controla a visibilidade da Animação Orbital */}
+        <motion.div
+          className="absolute inset-0 flex items-center justify-center"
+          animate={{
+            opacity: itemAtual ? 0 : 1, // Fica transparente se um item for selecionado
+            scale: itemAtual ? 0.9 : 1,   // Efeito de escala suave
+            pointerEvents: itemAtual ? 'none' : 'auto', // Desativa cliques quando invisível
+          }}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
+        >
+          <AnimacaoOrbital
+            imagemCentral="/robo.png"
+            itensOrbitaInterna={labelsInternos}
+            itensOrbitaExterna={labelsExternos}
+            onItemClick={handleItemClick}
+            tempo={tempoAnimacao}
+          />
+        </motion.div>
+
+        {/* AnimatePresence para controlar a entrada e saída do DetalheItem */}
+        <AnimatePresence>
+          {itemAtual && (
             <DetalheItem
               key={itemAtual}
               titulo={itemAtual}
@@ -57,17 +76,9 @@ export default function OutraPagina() {
               onClose={handleClose}
               onSubItemClick={handleItemClick}
             />
-          ) : (
-            <AnimacaoOrbital
-              key="orbital"
-              imagemCentral="/robo.png"
-              itensOrbitaInterna={labelsInternos}
-              itensOrbitaExterna={labelsExternos}
-              onItemClick={handleItemClick}
-              tempo={tempoAnimacao}
-            />
           )}
         </AnimatePresence>
+        
       </div>
     </main>
   );

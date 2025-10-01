@@ -4,7 +4,6 @@ import { motion, useTransform, MotionValue } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 
-// Tipos para as props (sem alteração)
 type BolaProps = {
   texto: string;
   tempo: MotionValue<number>;
@@ -24,19 +23,12 @@ type Props = {
   tempo: MotionValue<number>;
 };
 
-/**
- * Componente Bola: Representa cada item individual em órbita.
- */
 const Bola = ({ texto, tempo, anguloInicial, raioHorizontal, raioVertical, variant, multiplicadorVelocidade, onClick }: BolaProps) => {
-  
-  // =====> A LÓGICA DA ANIMAÇÃO QUE FALTAVA FOI RESTAURADA AQUI <=====
   const tempoAjustado = useTransform(tempo, t => t * multiplicadorVelocidade);
   const angulo = useTransform(tempoAjustado, (t) => t + anguloInicial);
   const x = useTransform(angulo, (a) => raioHorizontal * Math.cos(a * (Math.PI / 180)));
   const y = useTransform(angulo, (a) => raioVertical * Math.sin(a * (Math.PI / 180)));
-  // ===================================================================
 
-  // Estilos e tamanhos que definimos antes (estão corretos)
   const innerStyle = "bg-slate-900/50 backdrop-blur-md border border-cyan-400 shadow-[0_0_15px_rgba(56,189,248,0.5)]";
   const outerStyle = "bg-gradient-to-br from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/50";
   const styleClasses = variant === 'inner' ? innerStyle : outerStyle;
@@ -46,7 +38,7 @@ const Bola = ({ texto, tempo, anguloInicial, raioHorizontal, raioVertical, varia
 
   return (
     <motion.div
-      style={{ x, y }} // Usa as coordenadas X e Y calculadas para mover a bola
+      style={{ x, y }}
       onClick={onClick}
       whileHover={{ scale: 1.1, zIndex: 20, boxShadow: "0 0 25px rgba(56, 189, 248, 0.8)" }}
       className={`absolute flex items-center justify-center cursor-pointer rounded-full ${styleClasses} ${sizeClasses}`}
@@ -56,10 +48,6 @@ const Bola = ({ texto, tempo, anguloInicial, raioHorizontal, raioVertical, varia
   );
 };
 
-
-/**
- * Componente AnimacaoOrbital: O container principal. (Sem alterações)
- */
 export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, itensOrbitaExterna, onItemClick, tempo }: Props) {
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => { setIsMounted(true); }, []);
@@ -80,7 +68,13 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
       <svg className="absolute w-full h-full" style={{ zIndex: 0 }}><ellipse cx="50%" cy="50%" rx={pistaInterna.h} ry={pistaInterna.v} fill="none" stroke="#06b6d4" strokeOpacity="0.2" strokeWidth="2" strokeDasharray="5 10"/><ellipse cx="50%" cy="50%" rx={pistaExterna.h} ry={pistaExterna.v} fill="none" stroke="#06b6d4" strokeOpacity="0.2" strokeWidth="2" strokeDasharray="5 10"/></svg>
       
       <motion.div className="z-10" animate={{ filter: ["drop-shadow(0 0 10px #06b6d4)", "drop-shadow(0 0 20px #06b6d4)", "drop-shadow(0 0 10px #06b6d4)"] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}>
-        <Image src={imagemCentral} width={210} height={120} alt="Ícone Central" />
+        <Image
+          src={imagemCentral}
+          width={210}
+          height={120}
+          alt="Ícone Central"
+          style={{ height: 'auto' }} // AJUSTE: Adicionado para manter a proporção
+        />
       </motion.div>
       
       {Array.from({ length: numPontosNaOrbita }).map((_, index) => {
