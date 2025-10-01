@@ -89,7 +89,7 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
       
       {/* Imagem central com animação de brilho */}
       <motion.div className="z-10" animate={{ filter: ["drop-shadow(0 0 10px #06b6d4)", "drop-shadow(0 0 20px #06b6d4)", "drop-shadow(0 0 10px #06b6d4)"] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}>
-        <Image src={imagemCentral} width={120} height={120} alt="Ícone Central" />
+        <Image src={imagemCentral} width={210} height={120} alt="Ícone Central" />
       </motion.div>
       
       {/* Mapeia os arrays de itens para criar as Bolas em órbita */}
