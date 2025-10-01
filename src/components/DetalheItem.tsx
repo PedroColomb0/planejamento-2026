@@ -63,7 +63,9 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
           })}
         </svg>
         
-        <motion.div variants={itemVariants} className="w-64 h-64 rounded-full flex items-center justify-center z-10 bg-cyan-500 shadow-lg shadow-cyan-500/50">
+        <motion.div variants={itemVariants}            
+         className="w-64 h-64 rounded-full flex items-center justify-center z-10 bg-gradient-to-br from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/50"
+        >
           <h1 className="text-3xl text-center font-bold text-white uppercase tracking-widest px-4">{titulo}</h1>
         </motion.div>
 
