@@ -1,19 +1,22 @@
 import Link from 'next/link';
+import FundoTecnologico from '@/components/FundoTecnologico'; // Ajuste o caminho se necessário
 
 export default function HomePage() {
   return (
-    <main>
-      {/* O fundo é aplicado globalmente pelo CSS */}
-      <div className="background"></div>
-      
-      <div className="container">
-        <h1 className="title">
-          <Link href="/welcome">
-            PLANEJAMENTO ESTRATEGICO 2026<br />
-            GRUPO ROVEMA<br />
-            ADELIO BAROFALDI
-          </Link>
-        </h1>
+    <main className="relative flex items-center justify-center h-screen overflow-hidden">
+      {/* Componente do Fundo Animado */}
+      <FundoTecnologico />
+
+      {/* Conteúdo da Página */}
+      <div className="z-10 text-center">
+        <Link
+          href="/outra-pagina"
+          className="text-white text-5xl md:text-7xl font-bold cursor-pointer 
+                     hover:text-cyan-300 transition-colors duration-300
+                     hover:scale-110 transform-gpu transition-transform"
+        >
+          bom dia
+        </Link>
       </div>
     </main>
   );
