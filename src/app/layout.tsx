@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import AnimacaoPagina from "@/components/AnimacaoPagina"; // Ajuste o caminho se necessário
+import AnimacaoPagina from "@/components/AnimacaoPagina";
+import FundoTecnologico from "@/components/FundoTecnologico"; // 1. Importe o componente
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,6 +19,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={inter.className}>
+        <FundoTecnologico /> {/* 2. Adicione o fundo aqui */}
         <AnimacaoPagina>{children}</AnimacaoPagina>
       </body>
     </html>

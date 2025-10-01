@@ -1,11 +1,12 @@
 import Link from 'next/link';
-import FundoTecnologico from '@/components/FundoTecnologico'; // Ajuste o caminho se necessário
+
+// Remova a importação: import FundoTecnologico from '@/components/FundoTecnologico';
 
 export default function HomePage() {
   return (
-    <main className="relative flex items-center justify-center h-screen overflow-hidden">
-      {/* Componente do Fundo Animado */}
-      <FundoTecnologico />
+    // A classe "relative" não é mais necessária aqui, mas pode manter se quiser
+    <main className="flex items-center justify-center h-screen overflow-hidden">
+      {/* A chamada para <FundoTecnologico /> foi REMOVIDA daqui */}
 
       {/* Conteúdo da Página */}
       <div className="z-10 text-center">

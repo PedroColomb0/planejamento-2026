@@ -1,6 +1,7 @@
 @import "tailwindcss";
 
 body {
-  background-color: #0d1117; /* Um fundo escuro, caso a animação demore a carregar */
+  background-color: #0d1117;
   color: white;
+  overflow: hidden; /* Adicione esta linha */
 }

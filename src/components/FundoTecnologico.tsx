@@ -2,14 +2,14 @@
 
 import { useEffect, useMemo, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
-import { type Container, type ISourceOptions, type Engine } from "@tsparticles/engine"; // <-- ADIÇÃO 1: Importar o tipo Engine
+import { type Container, type ISourceOptions, type Engine } from "@tsparticles/engine";
 import { loadFull } from "tsparticles";
 
 export default function FundoTecnologico() {
   const [init, setInit] = useState(false);
 
   useEffect(() => {
-    initParticlesEngine(async (engine: Engine) => { // <-- ADIÇÃO 2: Aplicar o tipo Engine aqui
+    initParticlesEngine(async (engine: Engine) => {
       await loadFull(engine);
     }).then(() => {
       setInit(true);
@@ -67,7 +67,7 @@ export default function FundoTecnologico() {
           density: {
             enable: true,
           },
-          value: 80,
+          value: 150, // Quantidade de partículas aumentada
         },
         opacity: {
           value: 0.3,
