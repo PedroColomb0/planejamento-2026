@@ -80,7 +80,7 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
     // AJUSTE 1: A propriedade 'x: -150' desloca toda a animação para a esquerda na página.
     <motion.div 
       className="relative flex items-center justify-center w-[700px] h-[850px]"
-      style={{ x: -150 }} 
+      style={{ x: 0 }} 
       exit={{ opacity: 0, scale: 0.8 }}
       transition={{ duration: 0.5 }}
     >
