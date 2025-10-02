@@ -35,7 +35,7 @@ export const dadosHierarquicos: { [key: string]: string[] } = {
   ],
   "ENERGIA": [
     "GERADOR DIESEL", "SOLAR", "AMAZONAS PROJETO", "TÉRMICA", 
-    "HIDRÁULICA", "P.P.P ILUMINAÇÃO PUBLICA", "BATERIAS", 
+    "HIDRÁULICA", "P.P.P ILUMINAÇÃO PÚBLICA", "BATERIAS", 
     "SERVIÇOS", "GASPAR", "GERADORES", 
     "COMERCIALIZADORA", // Item clicável
     "MERCADO LIVRE"

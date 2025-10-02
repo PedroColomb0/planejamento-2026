@@ -69,7 +69,7 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
         
         <motion.div 
           variants={itemVariants}           
-          className="w-64 h-64 rounded-full flex items-center justify-center z-10 bg-gradient-to-br from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/50"
+          className="w-78 h-78 rounded-full flex items-center justify-center z-10 bg-gradient-to-br from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/50"
           // MUDANÇA 3: Adicionamos o stopPropagation aqui para a bola central.
           onClick={(e) => e.stopPropagation()}
         >
