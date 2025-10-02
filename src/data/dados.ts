@@ -41,7 +41,7 @@ export const dadosHierarquicos: { [key: string]: string[] } = {
     "MERCADO LIVRE"
   ],
   "PROJETOS": [
-    "PROJETO 1", "PROJETO 2", "PROJETO 3", "PROJETO 4", 
+    "INTRANET", "INDIQUE CERTO", "DATA CENTER", "PROJETO 4", 
     "PROJETO 5", "PROJETO 6", "PROJETO 7", "PROJETO 8"
   ],
 
