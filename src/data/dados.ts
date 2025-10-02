@@ -7,10 +7,13 @@ export const dadosHierarquicos: { [key: string]: string[] } = {
   "AGRONEGÓCIOS": [
     "CRÉDITO DE CARBONO", "SOJA", "MILHO", "SILAGEM", "FÁBRICA", 
     "PARCERIAS", "SECADOR", "BOITEL", "CONFINAMENTO", "MANEJO FLORESTAL", 
-    "CRIA E RECRIA GÉNETICA P.O", "LOCAÇÃO TRANSPORTE"
+    // SEPARAÇÃO SOLICITADA:
+    "CRIA E RECRIA", 
+    "GÉNETICA P.O", 
+    "LOCAÇÃO TRANSPORTE"
   ],
   "VEÍCULOS PESADOS": [
-    "CALCÁRIO", "BOI", "GRÃO", "CAFÉ",
+    "AGRO / VEÍCULOS PESADOS", // Agrupamento de Calcário, Boi, Grão, Café
     "COMBUSTIVEIS", "VENDAS ONLINE", "ATACADOS", "CWS", 
     "CONTRATO DE MANUTENÇÃO", "FRIGORIFICOS", "MATERIAIS DE CONSTRUÇÃO", 
     "VENDA DE MOTORES", "LOCAÇÃO", "PNEU", "CONSÓRCIO"
@@ -26,15 +29,16 @@ export const dadosHierarquicos: { [key: string]: string[] } = {
     "CENTRAL SEMINOVOS", "LICITAÇÕES", "LOCADORA"
   ],
   "FINANCEIRO": [
-    "DADOS", // Clicável
-    "FLUXO DE CAIXA",
+    "DADOS / FLUXO CAIXA", // Agrupamento de Dados e Fluxo de Caixa
     "UZZIPAY", "BIONIO", "CARTÕES ADMINISTRATIVO", 
     "MESA DE CRÉDITO", "LINHAS DE CRÉDITO", "FUNDOS"
   ],
   "ENERGIA": [
     "GERADOR DIESEL", "SOLAR", "AMAZONAS PROJETO", "TÉRMICA", 
     "HIDRÁULICA", "P.P.P ILUMINAÇÃO PUBLICA", "BATERIAS", 
-    "SERVIÇOS", "GASPAR", "GERADORES", "COMERCIALIZADORA", "MERCADO LIVRE"
+    "SERVIÇOS", "GASPAR", "GERADORES", 
+    "COMERCIALIZADORA", // Item clicável
+    "MERCADO LIVRE"
   ],
   "PROJETOS": [
     "PROJETO 1", "PROJETO 2", "PROJETO 3", "PROJETO 4", 
@@ -45,6 +49,12 @@ export const dadosHierarquicos: { [key: string]: string[] } = {
   // NÍVEL 2 (e Subsequentes): Detalhes de Subitens clicáveis
   // =========================================================
   
-  // Detalhamento de DADOS (Exemplo de hierarquia profunda)
-  "DADOS": ["Indicadores", "Relatórios", "Dashboards"],
+  "DADOS / FLUXO CAIXA": ["Indicadores", "Relatórios", "Dashboards", "Orçamento"],
+  
+  "AGRO / VEÍCULOS PESADOS": ["CALCÁRIO", "BOI", "GRÃO", "CAFÉ"],
+
+  "COMERCIALIZADORA": ["Subitem Comercializadora 1", "Subitem Comercializadora 2"], 
+
+  // Novos Detalhes (se necessário) - Por enquanto, CRIA E RECRIA e GÉNETICA P.O
+  // não têm sub-níveis de detalhe, então não precisam de chaves aqui.
 };
