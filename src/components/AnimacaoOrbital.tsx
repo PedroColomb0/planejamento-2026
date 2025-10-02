@@ -56,7 +56,7 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => { setIsMounted(true); }, []);
   
-  const pistaInterna = { h: 220, v: 290 };
+  const pistaInterna = { h: 210, v: 280 };
   const pistaExterna = { h: 320, v: 400 };
   
   // AJUSTE FINAL DOS ÂNGULOS: Mais espaço entre Veículos Leves, Energia e Projetos
