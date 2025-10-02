@@ -13,7 +13,7 @@ export const dadosHierarquicos: { [key: string]: string[] } = {
     "LOCAÇÃO TRANSPORTE"
   ],
   "VEÍCULOS PESADOS": [
-    "AGRO / VEÍCULOS PESADOS", // Agrupamento de Calcário, Boi, Grão, Café
+    "AGRO / CÁLCARIO / BOI / GRÃO / CAFÉ", // Agrupamento de Calcário, Boi, Grão, Café
     "COMBUSTÍVEIS", "VENDAS ONLINE", "ATACADOS", "CWS", 
     "CONTRATO DE MANUTENÇÃO", "FRIGORÍFICOS", "MATERIAIS DE CONSTRUÇÃO", 
     "VENDA DE MOTORES", "LOCAÇÃO", "PNEU", "CONSÓRCIO"
