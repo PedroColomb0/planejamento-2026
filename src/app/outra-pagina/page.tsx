@@ -26,7 +26,7 @@ export default function OutraPagina() {
   const labelsInternos = ["MARKETING", "CRM", "APLICATIVO", "EVENTOS", "CAMPANHAS", "SITE", "LEAD", "WHATSAPP"]; 
   
   // Os 7 rótulos para a órbita externa
-  const labelsExternos = ["AGRONEGÓCIOS", "VEÍCULOS PESADOS", "LICITAÇÃO", "VEICULOS LEVES", "FINANCEIRO", "ENERGIA", "PROJETOS"];
+  const labelsExternos = ["AGRONEGÓCIOS", "VEÍCULOS PESADOS", "LICITAÇÃO", "VEÍCULOS LEVES", "FINANCEIRO", "ENERGIA", "PROJETOS"];
   
   const itemAtual = hierarquia.length > 0 ? hierarquia[hierarquia.length - 1] : null;
   const subItensAtuais = itemAtual ? dadosHierarquicos[itemAtual] || [] : [];
