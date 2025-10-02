@@ -1,3 +1,5 @@
+// outra-pagina.tsx
+
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -20,8 +22,11 @@ export default function OutraPagina() {
     return () => animation.stop();
   }, [tempoAnimacao]);
 
-  const labelsInternos = ["MKT", "NPS", "CRM", "EVENTOS", "DADOS", "UX", "BI", "VENDAS"];
-  const labelsExternos = ["VEÍCULOS", "ENERGIA", "CONSÓRCIO", "LOCADORA"];
+  // Os 8 rótulos para a órbita interna
+  const labelsInternos = ["MARKETING", "CRM", "APLICATIVO", "EVENTOS", "CAMPANHAS", "SITE", "LEAD", "WHATSAPP"]; 
+  
+  // Os 7 rótulos para a órbita externa, incluindo AGRONEGÓCIOS
+  const labelsExternos = ["AGRONEGÓCIOS", "VEÍCULOS PESADOS", "LICITAÇÃO", "VEICULOS LEVES", "FINANCEIRO", "ENERGIA", "PROJETOS"];
   
   const itemAtual = hierarquia.length > 0 ? hierarquia[hierarquia.length - 1] : null;
   const subItensAtuais = itemAtual ? dadosHierarquicos[itemAtual] || [] : [];
@@ -51,15 +56,15 @@ export default function OutraPagina() {
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
           animate={{
-            opacity: itemAtual ? 0 : 1, // Fica transparente se um item for selecionado
-            scale: itemAtual ? 0.9 : 1,   // Efeito de escala suave
-            pointerEvents: itemAtual ? 'none' : 'auto', // Desativa cliques quando invisível
+            opacity: itemAtual ? 0 : 1,
+            scale: itemAtual ? 0.9 : 1,
+            pointerEvents: itemAtual ? 'none' : 'auto',
           }}
           transition={{ duration: 0.5, ease: 'easeInOut' }}
         >
           <AnimacaoOrbital
             imagemCentral="/robo.png"
-            itensOrbitaInterna={labelsInternos}
+            itensOrbitaInterna={labelsInternos} 
             itensOrbitaExterna={labelsExternos}
             onItemClick={handleItemClick}
             tempo={tempoAnimacao}

@@ -1,3 +1,5 @@
+// AnimacaoOrbital.tsx
+
 "use client";
 
 import { motion, useTransform, MotionValue } from "framer-motion";
@@ -54,8 +56,7 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
   
   const pistaInterna = { h: 220, v: 290 };
   const pistaExterna = { h: 320, v: 400 };
-  const numPontosNaOrbita = itensOrbitaInterna.length;
-
+  
   if (!isMounted) { return null; }
 
   return (
@@ -65,7 +66,10 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
       exit={{ opacity: 0, scale: 0.8 }}
       transition={{ duration: 0.5 }}
     >
-      <svg className="absolute w-full h-full" style={{ zIndex: 0 }}><ellipse cx="50%" cy="50%" rx={pistaInterna.h} ry={pistaInterna.v} fill="none" stroke="#06b6d4" strokeOpacity="0.2" strokeWidth="2" strokeDasharray="5 10"/><ellipse cx="50%" cy="50%" rx={pistaExterna.h} ry={pistaExterna.v} fill="none" stroke="#06b6d4" strokeOpacity="0.2" strokeWidth="2" strokeDasharray="5 10"/></svg>
+      <svg className="absolute w-full h-full" style={{ zIndex: 0 }}>
+        <ellipse cx="50%" cy="50%" rx={pistaInterna.h} ry={pistaInterna.v} fill="none" stroke="#06b6d4" strokeOpacity="0.2" strokeWidth="2" strokeDasharray="5 10"/>
+        <ellipse cx="50%" cy="50%" rx={pistaExterna.h} ry={pistaExterna.v} fill="none" stroke="#06b6d4" strokeOpacity="0.2" strokeWidth="2" strokeDasharray="5 10"/>
+      </svg>
       
       <motion.div className="z-10" animate={{ filter: ["drop-shadow(0 0 10px #06b6d4)", "drop-shadow(0 0 20px #06b6d4)", "drop-shadow(0 0 10px #06b6d4)"] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}>
         <Image
@@ -73,18 +77,45 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
           width={210}
           height={120}
           alt="Ícone Central"
-          style={{ height: 'auto' }} // AJUSTE: Adicionado para manter a proporção
+          style={{ height: 'auto' }}
         />
       </motion.div>
       
-      {Array.from({ length: numPontosNaOrbita }).map((_, index) => {
-        const angulo = (index / numPontosNaOrbita) * 360;
-        const textoExterno = itensOrbitaExterna[index % itensOrbitaExterna.length];
+      {/* 1. RENDERIZAÇÃO DA ÓRBITA INTERNA (8 ITENS) */}
+      {Array.from({ length: itensOrbitaInterna.length }).map((_, index) => {
+        // Distribuição uniforme para os 8 itens
+        const angulo = (index / itensOrbitaInterna.length) * 360;
         return (
-          <React.Fragment key={index}>
-            <Bola texto={itensOrbitaInterna[index]} tempo={tempo} anguloInicial={angulo} raioHorizontal={pistaInterna.h} raioVertical={pistaInterna.v} variant="inner" multiplicadorVelocidade={1} />
-            <Bola texto={textoExterno} tempo={tempo} anguloInicial={angulo} raioHorizontal={pistaExterna.h} raioVertical={pistaExterna.v} variant="outer" multiplicadorVelocidade={0.7} onClick={() => onItemClick(textoExterno)} />
-          </React.Fragment>
+          <Bola 
+            key={`inner-${itensOrbitaInterna[index]}`}
+            texto={itensOrbitaInterna[index]} 
+            tempo={tempo} 
+            anguloInicial={angulo} 
+            raioHorizontal={pistaInterna.h} 
+            raioVertical={pistaInterna.v} 
+            variant="inner" 
+            multiplicadorVelocidade={1} 
+          />
+        );
+      })}
+
+      {/* 2. RENDERIZAÇÃO DA ÓRBITA EXTERNA (7 ITENS) */}
+      {Array.from({ length: itensOrbitaExterna.length }).map((_, index) => {
+        // Distribuição uniforme para os 7 itens externos
+        const angulo = (index / itensOrbitaExterna.length) * 360;
+        const textoExterno = itensOrbitaExterna[index];
+        return (
+          <Bola 
+            key={`outer-${textoExterno}`}
+            texto={textoExterno} 
+            tempo={tempo} 
+            anguloInicial={angulo} 
+            raioHorizontal={pistaExterna.h} 
+            raioVertical={pistaExterna.v} 
+            variant="outer" 
+            multiplicadorVelocidade={0.7} 
+            onClick={() => onItemClick(textoExterno)} 
+          />
         );
       })}
     </motion.div>
