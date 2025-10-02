@@ -87,7 +87,7 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
       
       {/* NOVO BLOCO CENTRAL: Adicionado layout flexível e o texto CLIENTE */}
       <motion.div 
-        className="z-10 flex flex-col items-center justify-center -translate-y-6" // Coluna flexível para alinhar imagem e texto
+        className="z-10 flex flex-col items-center justify-center -translate-y-11" // Coluna flexível para alinhar imagem e texto
         animate={{ filter: ["drop-shadow(0 0 10px #06b6d4)", "drop-shadow(0 0 20px #06b6d4)", "drop-shadow(0 0 10px #06b6d4)"] }} 
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       >
