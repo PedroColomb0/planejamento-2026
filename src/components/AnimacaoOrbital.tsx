@@ -1,5 +1,3 @@
-// AnimacaoOrbital.tsx
-
 "use client";
 
 import { motion, useTransform, MotionValue } from "framer-motion";
@@ -63,7 +61,7 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
   
   // AJUSTE FINAL DOS ÂNGULOS: Mais espaço entre Veículos Leves, Energia e Projetos
   const angulosOrbitaExterna = [
-    90,    // VEÍCULOS PESADOS (TOPO)
+    90,     // VEÍCULOS PESADOS (TOPO)
     141.43, // LICITAÇÃO
     192.86, // FINANCEIRO
     244.29, // ENERGIA
@@ -87,7 +85,12 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
         <ellipse cx="50%" cy="50%" rx={pistaExterna.h} ry={pistaExterna.v} fill="none" stroke="#06b6d4" strokeOpacity="0.2" strokeWidth="2" strokeDasharray="5 10"/>
       </svg>
       
-      <motion.div className="z-10" animate={{ filter: ["drop-shadow(0 0 10px #06b6d4)", "drop-shadow(0 0 20px #06b6d4)", "drop-shadow(0 0 10px #06b6d4)"] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}>
+      {/* NOVO BLOCO CENTRAL: Adicionado layout flexível e o texto CLIENTE */}
+      <motion.div 
+        className="z-10 flex flex-col items-center justify-center -translate-y-6" // Coluna flexível para alinhar imagem e texto
+        animate={{ filter: ["drop-shadow(0 0 10px #06b6d4)", "drop-shadow(0 0 20px #06b6d4)", "drop-shadow(0 0 10px #06b6d4)"] }} 
+        transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
+      >
         <Image
           src={imagemCentral}
           width={210}
@@ -95,6 +98,10 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
           alt="Ícone Central"
           style={{ height: 'auto' }}
         />
+        {/* TEXTO CLIENTE ADICIONADO ABAIXO DA IMAGEM */}
+        <span className="mt-2 text-xl font-extrabold tracking-widest text-cyan-400 uppercase drop-shadow-[0_0_5px_rgba(56,189,248,0.8)]">
+          CLIENTE
+        </span>
       </motion.div>
       
       {/* 1. RENDERIZAÇÃO DA ÓRBITA INTERNA (8 ITENS) - Giram com velocidade 1 */}
