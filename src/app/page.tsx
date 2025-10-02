@@ -31,9 +31,16 @@ export default function HomePage() {
                 DO DESAFIO À <br /> OPORTUNIDADE
               </h1>
 
-              <p className="mt-4 text-lg md:text-xl font-light uppercase tracking-[.25em] text-yellow-400">
-                Diretrizes
-              </p>
+              {/* INÍCIO DA MUDANÇA: Usando flexbox para alinhar à esquerda e à direita */}
+              <div className="mt-4 w-full flex justify-between items-center text-yellow-400">
+                <p className="text-lg md:text-xl font-light uppercase tracking-[.25em]">
+                  Diretrizes
+                </p>
+                <p className="text-lg md:text-xl font-light uppercase tracking-[.25em]">
+                  2026
+                </p>
+              </div>
+              {/* FIM DA MUDANÇA */}
 
               <div className="mt-8 md:self-end">
                 <Image
