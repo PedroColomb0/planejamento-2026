@@ -1,8 +1,10 @@
+// src/app/layout.tsx
+
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import AnimacaoPagina from "@/components/AnimacaoPagina";
-import FundoTecnologico from "@/components/FundoTecnologico"; // 1. Importe o componente
+// import AnimacaoPagina from "@/components/AnimacaoPagina"; // 1. Linha removida/comentada
+import FundoTecnologico from "@/components/FundoTecnologico";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +21,8 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body className={inter.className}>
-        <FundoTecnologico /> {/* 2. Adicione o fundo aqui */}
-        <AnimacaoPagina>{children}</AnimacaoPagina>
+        <FundoTecnologico />
+        {children} 
       </body>
     </html>
   );
