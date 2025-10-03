@@ -47,12 +47,12 @@ export default function OutraPagina() {
       {/* --- INÍCIO DA ALTERAÇÃO --- */}
 
       {/* 1. Imagem da cabeça na sua posição original exata. */}
-      <div className="absolute top-52 left-50 z-10 w-[280px] animate-head-beat-slow">
+      <div className="absolute top-52 left-40 z-10 w-[280px] animate-head-beat-slow">
         <Image src="/circulo-cabeca.png" alt="Gráfico de um rosto" width={800} height={800} style={{ objectFit: 'contain' }} />
       </div>
 
       {/* 2. Texto posicionado logo abaixo da imagem, alinhado com ela. */}
-      <div className="absolute top-115 left-50 z-10 w-[280px] text-white text-center">
+      <div className="absolute top-115 left-40 z-10 w-[280px] text-white text-center">
         <h1 className="text-3xl lg:text-4xl font-bold uppercase tracking-wider text-shadow-lg">
           DO DESAFIO À <br /> OPORTUNIDADE
         </h1>
