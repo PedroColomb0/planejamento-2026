@@ -89,18 +89,15 @@ export default function TioChicoPage() {
         />
       </motion.div>
 
-      {/* --- MUDANÇAS NO BALÃO DE FALA AQUI --- */}
+      {/* --- BALÃO DE FALA --- */}
       <motion.div
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-        // 1. LARGURA AUMENTADA (de max-w-2xl para max-w-4xl)
-        // 2. PREENCHIMENTO AUMENTADO (de p-8 para p-10)
         className="relative mt-8 md:mt-0 md:ml-8 max-w-4xl bg-slate-900/80 backdrop-blur-md border border-cyan-500 rounded-2xl p-10 shadow-2xl shadow-cyan-500/30"
-        onClick={(e) => e.stopPropagation()} 
+        // A LINHA onClick com stopPropagation() FOI REMOVIDA DAQUI
       >
         <motion.p
-          // 3. FONTE AUMENTADA (de text-lg/xl para text-xl/2xl)
           className="text-white text-xl lg:text-2xl leading-relaxed"
           variants={containerVariants}
           initial="hidden"
