@@ -88,7 +88,7 @@ export default function DetalheCliente({ onClose }: Props) {
           }}
         >
           <h2 className="text-3xl font-extrabold text-center mb-6 bg-gradient-to-r from-yellow-200 to-yellow-400 text-transparent bg-clip-text uppercase tracking-wider">
-            Regras de Comunicação
+            Réguas de Comunicação
           </h2>
           <ul className="space-y-3">
             {regrasComunicacao.map((regra, index) => (
