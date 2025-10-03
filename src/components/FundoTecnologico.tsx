@@ -44,13 +44,20 @@ export default function FundoTecnologico() {
       },
       particles: {
         color: {
-          value: "#00bfff",
+          value: "#00bfff", // Deep Sky Blue
+        },
+        // 1. Adicionado efeito de brilho (glow) nas partículas
+        shadow: {
+          enable: true,
+          color: "#00bfff",
+          blur: 10, // Aumenta o "borrão" do brilho
         },
         links: {
           color: "#ffffff",
           distance: 150,
           enable: true,
-          opacity: 0.2,
+          // 2. Opacidade das linhas aumentada para ficarem mais visíveis
+          opacity: 0.4, 
           width: 1,
         },
         move: {
@@ -67,10 +74,11 @@ export default function FundoTecnologico() {
           density: {
             enable: true,
           },
-          value: 150, // Quantidade de partículas aumentada
+          value: 150,
         },
+        // 3. Opacidade das partículas aumentada para ficarem mais fortes
         opacity: {
-          value: 0.3,
+          value: 0.7, 
         },
         shape: {
           type: "circle",
