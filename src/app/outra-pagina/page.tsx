@@ -61,6 +61,9 @@ export default function OutraPagina() {
           <h1 className="text-3xl lg:text-4xl font-bold uppercase tracking-wider text-shadow-lg">
             DO DESAFIO À <br /> OPORTUNIDADE
           </h1>
+          <p className="text-lg md:text-xl font-light uppercase tracking-[.25em] text-yellow-400 mt-2">
+            2026
+          </p>
         </div>
       </div>
       
