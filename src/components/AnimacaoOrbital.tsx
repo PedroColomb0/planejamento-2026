@@ -1,3 +1,5 @@
+// components/AnimacaoOrbital.tsx
+
 "use client";
 
 import { motion, useTransform, MotionValue } from "framer-motion";
@@ -33,13 +35,11 @@ const Bola = ({ texto, tempo, anguloInicial, raioHorizontal, raioVertical, varia
   const innerStyle = "bg-slate-900/50 backdrop-blur-md border border-cyan-400 shadow-[0_0_15px_rgba(56,189,248,0.5)]";
   const outerStyle = "bg-gradient-to-br from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/50";
   const styleClasses = variant === 'inner' ? innerStyle : outerStyle;
-
-  const textClasses = variant === 'inner' ? "text-cyan-300" : "text-white";
-  const sizeClasses = variant === 'inner' ? "w-20 h-20" : "w-28 h-28";
   
-  // Otimização de texto para caber AGRONEGÓCIOS
-  const spanClasses = variant === 'outer' ? "font-bold text-xs uppercase text-center leading-tight p-1" : 
-                                            "font-bold text-sm tracking-widest uppercase";
+  // <-- MUDANÇA 1: Aumentado o tamanho das bolas e da fonte -->
+  const sizeClasses = variant === 'inner' ? "w-24 h-24" : "w-32 h-32";
+  const spanClasses = variant === 'outer' ? "font-bold text-sm uppercase text-center leading-tight p-1" : 
+                                            "font-bold text-base tracking-widest uppercase";
 
   return (
     <motion.div
@@ -57,26 +57,20 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => { setIsMounted(true); }, []);
   
-  const pistaInterna = { h: 210, v: 280 };
-  const pistaExterna = { h: 320, v: 400 };
+  // <-- MUDANÇA 2: Aumentado o raio das pistas/órbitas -->
+  const pistaInterna = { h: 240, v: 310 };
+  const pistaExterna = { h: 420, v: 480 };
   
-  // AJUSTE FINAL DOS ÂNGULOS: Mais espaço entre Veículos Leves, Energia e Projetos
   const angulosOrbitaExterna = [
-    90,     // VEÍCULOS PESADOS (TOPO)
-    141.43, // LICITAÇÃO
-    192.86, // FINANCEIRO
-    244.29, // ENERGIA
-    295.71, // VEÍCULOS LEVES (FUNDO)
-    347.14, // PROJETOS
-    38.57   // AGRONEGÓCIOS
+    90, 141.43, 192.86, 244.29, 295.71, 347.14, 38.57
   ];
-
 
   if (!isMounted) { return null; }
 
   return (
+    // <-- MUDANÇA 3: Aumentado o tamanho do contêiner geral -->
     <motion.div 
-      className="relative flex items-center justify-center w-[700px] h-[850px]"
+      className="relative flex items-center justify-center w-[900px] h-[1000px]"
       style={{ x: 0 }} 
       exit={{ opacity: 0, scale: 0.8 }}
       transition={{ duration: 0.5 }}
@@ -86,27 +80,26 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
         <ellipse cx="50%" cy="50%" rx={pistaExterna.h} ry={pistaExterna.v} fill="none" stroke="#06b6d4" strokeOpacity="0.2" strokeWidth="2" strokeDasharray="5 10"/>
       </svg>
       
-      {/* NOVO BLOCO CENTRAL: Adicionado layout flexível e o texto CLIENTE */}
       <motion.div 
-        className="z-10 flex flex-col items-center justify-center -translate-y-2" // Coluna flexível para alinhar imagem e texto
+        className="z-10 flex flex-col items-center justify-center -translate-y-2"
         onClick={onCentroClick}
         animate={{ filter: ["drop-shadow(0 0 10px #06b6d4)", "drop-shadow(0 0 20px #06b6d4)", "drop-shadow(0 0 10px #06b6d4)"] }} 
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       >
+        {/* <-- MUDANÇA 4: Aumentado o tamanho da imagem central --> */}
         <Image
           src={imagemCentral}
-          width={210}
-          height={120}
+          width={250}
+          height={140}
           alt="Ícone Central"
           style={{ height: 'auto' }}
         />
-        {/* TEXTO CLIENTE ADICIONADO ABAIXO DA IMAGEM */}
         <span className="mt-2 text-xl font-extrabold tracking-widest text-cyan-400 uppercase drop-shadow-[0_0_5px_rgba(56,189,248,0.8)]">
           CLIENTE
         </span>
       </motion.div>
       
-      {/* 1. RENDERIZAÇÃO DA ÓRBITA INTERNA (8 ITENS) - Giram com velocidade 1 */}
+      {/* Renderização da Órbita Interna */}
       {Array.from({ length: itensOrbitaInterna.length }).map((_, index) => {
         const angulo = (index / itensOrbitaInterna.length) * 360;
         return (
@@ -118,12 +111,12 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
             raioHorizontal={pistaInterna.h} 
             raioVertical={pistaInterna.v} 
             variant="inner" 
-            multiplicadorVelocidade={1} // GIRA
+            multiplicadorVelocidade={1}
           />
         );
       })}
 
-      {/* 2. RENDERIZAÇÃO DA ÓRBITA EXTERNA (7 ITENS) - Paradas com velocidade 0 */}
+      {/* Renderização da Órbita Externa */}
       {Array.from({ length: itensOrbitaExterna.length }).map((_, index) => {
         const angulo = angulosOrbitaExterna[index % angulosOrbitaExterna.length];
         const textoExterno = itensOrbitaExterna[index];
@@ -136,7 +129,7 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
             raioHorizontal={pistaExterna.h} 
             raioVertical={pistaExterna.v} 
             variant="outer" 
-            multiplicadorVelocidade={0} // NÃO GIRA
+            multiplicadorVelocidade={0}
             onClick={() => onItemClick(textoExterno)} 
           />
         );
