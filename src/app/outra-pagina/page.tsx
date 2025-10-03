@@ -1,4 +1,4 @@
-// outra-pagina.tsx (Código com a adição dos olhos interativos)
+// outra-pagina.tsx (Código com a alteração)
 
 "use client";
 
@@ -9,7 +9,7 @@ import AnimacaoOrbital from "@/components/AnimacaoOrbital";
 import DetalheItem from "@/components/DetalheItem";
 import DetalheCliente from "@/components/DetalheCliente";
 import { dadosHierarquicos } from "@/data/dados";
-import OlhoInterativo from "@/components/OlhoInterativo"; // <-- 1. IMPORTAR O NOVO COMPONENTE
+import OlhoInterativo from "@/components/OlhoInterativo";
 
 export default function OutraPagina() {
   const [hierarquia, setHierarquia] = useState<string[]>([]);
@@ -45,14 +45,25 @@ export default function OutraPagina() {
   return (
     <main className="relative flex flex-col items-center justify-center h-screen overflow-hidden">
       
-      {/* --- INÍCIO DA ALTERAÇÃO (CABEÇA E TEXTO) --- */}
-      <div className="absolute top-52 left-40 z-10 w-[280px] animate-head-beat-slow">
-        <Image src="/circulo-cabeca.png" alt="Gráfico de um rosto" width={800} height={800} style={{ objectFit: 'contain' }} />
-      </div>
-      <div className="absolute top-115 left-40 z-10 w-[280px] text-white text-center">
-        <h1 className="text-3xl lg:text-4xl font-bold uppercase tracking-wider text-shadow-lg">
-          DO DESAFIO À <br /> OPORTUNIDADE
-        </h1>
+      {/* --- INÍCIO DA ALTERAÇÃO (CABEÇA E TEXTO FIXOS) --- */}
+      <div className="fixed top-8 left-8 z-10 w-[280px]">
+        {/* Imagem da Cabeça */}
+        <div className="animate-head-beat-slow">
+          <Image 
+            src="/circulo-cabeca.png" 
+            alt="Gráfico de um rosto" 
+            width={800} 
+            height={800} 
+            style={{ objectFit: 'contain' }} 
+          />
+        </div>
+        
+        {/* Texto posicionado em relação ao container */}
+        <div className="relative text-white text-center mt-[-30px]">
+          <h1 className="text-3xl lg:text-4xl font-bold uppercase tracking-wider text-shadow-lg">
+            DO DESAFIO À <br /> OPORTUNIDADE
+          </h1>
+        </div>
       </div>
       {/* --- FIM DA ALTERAÇÃO --- */}
 
@@ -63,21 +74,15 @@ export default function OutraPagina() {
       <div className="relative w-full h-full flex items-center justify-center z-20">
         
         {/* --- INÍCIO DA ADIÇÃO DOS OLHOS --- */}
-        {/*
-          Aqui posicionamos os olhos. 
-          Você precisará ajustar os valores de 'top' e 'left' para cada olho
-          para que eles se alinhem perfeitamente com a imagem do seu robô (/robo.png).
-          O 'z-index' garante que os olhos fiquem por cima de outros elementos.
-        */}
         <div 
           className="absolute z-30" 
-          style={{ top: 'calc(50% - 156px)', left: 'calc(50% - 14px)' }} // Exemplo: Posição do olho esquerdo
+          style={{ top: 'calc(50% - 156px)', left: 'calc(50% - 14px)' }}
         >
           <OlhoInterativo />
         </div>
         <div 
           className="absolute z-30" 
-          style={{ top: 'calc(50% - 156px)', left: 'calc(50% + 14px)' }} // Exemplo: Posição do olho direito
+          style={{ top: 'calc(50% - 156px)', left: 'calc(50% + 14px)' }}
         >
           <OlhoInterativo />
         </div>
