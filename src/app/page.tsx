@@ -3,14 +3,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-
 export default function HomePage() {
   return (
-    <Link href="/outra-pagina" className="contents">
+    // ALTERAÇÃO AQUI: O link agora aponta para /tio-chico
+    <Link href="/tio-chico" className="contents">
       <main
         className="relative flex items-center justify-center h-screen overflow-hidden bg-cover bg-center cursor-pointer"
         style={{ backgroundImage: "url('/background-stars.jpg')" }}
       >
+        {/* O resto do seu código continua igual... */}
         <div className="relative w-full h-full max-w-screen-xl mx-auto">
 
           <div className="absolute w-1/2 md:w-2/5 top-[22%] -translate-y-1/4 left-1/2 -translate-x-1/2 md:left-0 md:top-[43%] md:-translate-y-1/2 md:translate-x-0 md:-ml-24 animate-head-beat-slow">
@@ -20,7 +21,7 @@ export default function HomePage() {
               width={800}
               height={800}
               style={{ objectFit: 'contain' }}
-              priority // AJUSTE: Adicionado para otimização de LCP
+              priority 
             />
           </div>
 
@@ -31,7 +32,6 @@ export default function HomePage() {
                 DO DESAFIO À <br /> OPORTUNIDADE
               </h1>
 
-              {/* INÍCIO DA MUDANÇA: Usando flexbox para alinhar à esquerda e à direita */}
               <div className="mt-4 w-full flex justify-between items-center text-yellow-400">
                 <p className="text-lg md:text-xl font-light uppercase tracking-[.25em]">
                   Diretrizes
@@ -40,15 +40,14 @@ export default function HomePage() {
                   2026
                 </p>
               </div>
-              {/* FIM DA MUDANÇA */}
-
+              
               <div className="mt-8 md:self-end">
                 <Image
                   src="/Grupo Rovema.png"
                   alt="Logo do Grupo Rovema"
                   width={240}
                   height={66}
-                  style={{ height: 'auto' }} // AJUSTE: Adicionado para manter a proporção
+                  style={{ height: 'auto' }}
                 />
               </div>
             </div>
