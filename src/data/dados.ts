@@ -44,10 +44,11 @@ export const dadosHierarquicos: { [key: string]: string[] } = {
     "INTRANET", "INDIQUE CERTO", "DATA CENTER", "FÁBRICA BIOINSUMO", 
     "BIOECONOMIA - FLORESTA", "VENDAS ON-LINE", "APP GRUPO", "UNIFICAÇÃO DE CADASTRO"
     , "RASTREABILIDADE / GADO / SOJA / RAÇÃO", "INTELIGENCIA ARTIFICIAL", "PROGRAMA DE FIDELIDADE"
+    , "REDE SOCIAL - CLIENTE", "INCLUSÃO / PERTENCIMENTO"
   ],
 
   // =========================================================
-  // NÍVEL 2 (e Subsequentes): Detalhes de Subitens clicáveis
+  // NÍVEL 2 (e Subsequentes): Detalhes de Subitens clicáveis 
   // =========================================================
   
   "DADOS / FLUXO CAIXA": ["Indicadores", "Relatórios", "Dashboards", "Orçamento"],
