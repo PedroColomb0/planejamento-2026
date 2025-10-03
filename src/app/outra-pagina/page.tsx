@@ -1,4 +1,4 @@
-// outra-pagina.tsx (Código com a posição corrigida)
+// outra-pagina.tsx (Código com a adição dos olhos interativos)
 
 "use client";
 
@@ -9,6 +9,7 @@ import AnimacaoOrbital from "@/components/AnimacaoOrbital";
 import DetalheItem from "@/components/DetalheItem";
 import DetalheCliente from "@/components/DetalheCliente";
 import { dadosHierarquicos } from "@/data/dados";
+import OlhoInterativo from "@/components/OlhoInterativo"; // <-- 1. IMPORTAR O NOVO COMPONENTE
 
 export default function OutraPagina() {
   const [hierarquia, setHierarquia] = useState<string[]>([]);
@@ -44,30 +45,44 @@ export default function OutraPagina() {
   return (
     <main className="relative flex flex-col items-center justify-center h-screen overflow-hidden">
       
-      {/* --- INÍCIO DA ALTERAÇÃO --- */}
-
-      {/* 1. Imagem da cabeça na sua posição original exata. */}
+      {/* --- INÍCIO DA ALTERAÇÃO (CABEÇA E TEXTO) --- */}
       <div className="absolute top-52 left-40 z-10 w-[280px] animate-head-beat-slow">
         <Image src="/circulo-cabeca.png" alt="Gráfico de um rosto" width={800} height={800} style={{ objectFit: 'contain' }} />
       </div>
-
-      {/* 2. Texto posicionado logo abaixo da imagem, alinhado com ela. */}
       <div className="absolute top-115 left-40 z-10 w-[280px] text-white text-center">
         <h1 className="text-3xl lg:text-4xl font-bold uppercase tracking-wider text-shadow-lg">
           DO DESAFIO À <br /> OPORTUNIDADE
         </h1>
       </div>
-      
       {/* --- FIM DA ALTERAÇÃO --- */}
 
-      {/* Logo movido para baixo e para a direita */}
       <div className="absolute bottom-8 right-8 z-10 w-[240px]">
         <Image src="/Grupo Rovema.png" alt="Logo do Grupo Rovema" width={240} height={66} style={{ objectFit: 'contain' }} />
       </div>
 
       <div className="relative w-full h-full flex items-center justify-center z-20">
         
-        {/* Wrapper que controla a visibilidade da Animação Orbital */}
+        {/* --- INÍCIO DA ADIÇÃO DOS OLHOS --- */}
+        {/*
+          Aqui posicionamos os olhos. 
+          Você precisará ajustar os valores de 'top' e 'left' para cada olho
+          para que eles se alinhem perfeitamente com a imagem do seu robô (/robo.png).
+          O 'z-index' garante que os olhos fiquem por cima de outros elementos.
+        */}
+        <div 
+          className="absolute z-30" 
+          style={{ top: 'calc(50% - 156px)', left: 'calc(50% - 14px)' }} // Exemplo: Posição do olho esquerdo
+        >
+          <OlhoInterativo />
+        </div>
+        <div 
+          className="absolute z-30" 
+          style={{ top: 'calc(50% - 156px)', left: 'calc(50% + 14px)' }} // Exemplo: Posição do olho direito
+        >
+          <OlhoInterativo />
+        </div>
+        {/* --- FIM DA ADIÇÃO DOS OLHOS --- */}
+
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
           animate={{
@@ -87,7 +102,6 @@ export default function OutraPagina() {
           />
         </motion.div>
 
-        {/* AnimatePresence para o DetalheItem (navegação) */}
         <AnimatePresence>
           {itemAtual && (
             <DetalheItem
@@ -100,7 +114,6 @@ export default function OutraPagina() {
           )}
         </AnimatePresence>
         
-        {/* AnimatePresence para o DetalheCliente */}
         <AnimatePresence>
           {mostrarDetalheCliente && (
             <DetalheCliente onClose={handleCloseDetalheCliente} />
