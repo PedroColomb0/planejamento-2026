@@ -26,7 +26,7 @@ export default function OutraPagina() {
   }, [tempoAnimacao]);
 
   const labelsInternos = ["MARKETING", "CRM", "APLICATIVO", "EVENTOS", "CAMPANHAS", "SITE", "LEAD", "WHATSAPP"];
-  const labelsExternos = ["AGRONEGÓCIOS", "VEÍCULOS PESADOS", "LICITAÇÃO", "VEÍCULOS LEVES", "FINANCEIRO", "ENERGIA", "PROJETOS"];
+  const labelsExternos = ["AGRONEGÓCIOS", "VEÍCULOS PESADOS", "LICITAÇÃO", "VEÍCULOS LEVES", "SERVIÇOS FINANCEIROS", "ENERGIA", "PROJETOS"];
   
   const itemAtual = hierarquia.length > 0 ? hierarquia[hierarquia.length - 1] : null;
   const subItensAtuais = itemAtual ? dadosHierarquicos[itemAtual] || [] : [];

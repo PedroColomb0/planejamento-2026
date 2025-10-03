@@ -28,7 +28,7 @@ export const dadosHierarquicos: { [key: string]: string[] } = {
     "PEGEOUT", "VENDAS ON-LINE", "CITROËN", 
     "CENTRAL SEMINOVOS", "D` PASCHOAL", "LOCADORA"
   ],
-  "FINANCEIRO": [
+  "SERVIÇOS FINANCEIROS": [
     "DADOS / FLUXO CAIXA", // Agrupamento de Dados e Fluxo de Caixa
     "UZZIPAY", "BIONIO", "CARTÕES ADMINISTRATIVO", 
     "MESA DE CRÉDITO", "LINHAS DE CRÉDITO", "FUNDOS"
