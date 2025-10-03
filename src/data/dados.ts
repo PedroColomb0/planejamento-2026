@@ -26,7 +26,7 @@ export const dadosHierarquicos: { [key: string]: string[] } = {
     "CORRETORA SEGUROS", "CONSÓRCIO", "CARRO ELÉTRICO", "FIAT", 
     "BARTER", "JUINA", "MIT", "CARRO POR ASSINATURA", 
     "PEGEOOUT", "VENDAS ON-LINE", "CITROËN", 
-    "CENTRAL SEMINOVOS", "LICITAÇÕES", "LOCADORA"
+    "CENTRAL SEMINOVOS", "D` PASCHOAL", "LOCADORA"
   ],
   "FINANCEIRO": [
     "DADOS / FLUXO CAIXA", // Agrupamento de Dados e Fluxo de Caixa
@@ -34,15 +34,16 @@ export const dadosHierarquicos: { [key: string]: string[] } = {
     "MESA DE CRÉDITO", "LINHAS DE CRÉDITO", "FUNDOS"
   ],
   "ENERGIA": [
-    "GERADOR DIESEL", "SOLAR", "AMAZONAS PROJETO", "TÉRMICA", 
+    "SOLAR", "AMAZONAS PROJETO", "TÉRMICA", 
     "HIDRÁULICA", "P.P.P ILUMINAÇÃO PÚBLICA", "BATERIAS", 
     "SERVIÇOS", "GASPAR", "GERADORES", 
     "COMERCIALIZADORA", // Item clicável
     "MERCADO LIVRE"
   ],
   "PROJETOS": [
-    "INTRANET", "INDIQUE CERTO", "DATA CENTER", "PROJETO 4", 
-    "PROJETO 5", "PROJETO 6", "PROJETO 7", "PROJETO 8"
+    "INTRANET", "INDIQUE CERTO", "DATA CENTER", "FÁBRICA BIOINSUMO", 
+    "BIOECONOMIA - FLORESTA", "VENDAS ON-LINE", "APP GRUPO", "UNIFICAÇÃO DE CADASTRO"
+    , "RASTREABILIDADE / GADO / SOJA / RAÇÃO", "INTELIGENCIA ARTIFICIAL", "PROGRAMA DE FIDELIDADE"
   ],
 
   // =========================================================
