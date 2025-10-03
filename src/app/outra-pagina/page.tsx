@@ -1,4 +1,4 @@
-// outra-pagina.tsx (Código completo atualizado)
+// outra-pagina.tsx (Código com a posição corrigida)
 
 "use client";
 
@@ -7,12 +7,12 @@ import { AnimatePresence, motion, useMotionValue, animate } from "framer-motion"
 import Image from "next/image";
 import AnimacaoOrbital from "@/components/AnimacaoOrbital";
 import DetalheItem from "@/components/DetalheItem";
-import DetalheCliente from "@/components/DetalheCliente"; // <-- 1. IMPORTAR O NOVO COMPONENTE
+import DetalheCliente from "@/components/DetalheCliente";
 import { dadosHierarquicos } from "@/data/dados";
 
 export default function OutraPagina() {
   const [hierarquia, setHierarquia] = useState<string[]>([]);
-  const [mostrarDetalheCliente, setMostrarDetalheCliente] = useState(false); // <-- 2. ADICIONAR NOVO ESTADO
+  const [mostrarDetalheCliente, setMostrarDetalheCliente] = useState(false);
   const tempoAnimacao = useRef(useMotionValue(0)).current;
 
   useEffect(() => {
@@ -38,18 +38,30 @@ export default function OutraPagina() {
     setHierarquia(prev => prev.slice(0, -1));
   };
 
-  // <-- 3. FUNÇÕES PARA ABRIR E FECHAR O NOVO MODAL
   const handleCentroClick = () => setMostrarDetalheCliente(true);
   const handleCloseDetalheCliente = () => setMostrarDetalheCliente(false);
 
-
   return (
     <main className="relative flex flex-col items-center justify-center h-screen overflow-hidden">
-      {/* Imagens de fundo */}
+      
+      {/* --- INÍCIO DA ALTERAÇÃO --- */}
+
+      {/* 1. Imagem da cabeça na sua posição original exata. */}
       <div className="absolute top-52 left-50 z-10 w-[280px] animate-head-beat-slow">
         <Image src="/circulo-cabeca.png" alt="Gráfico de um rosto" width={800} height={800} style={{ objectFit: 'contain' }} />
       </div>
-      <div className="absolute top-120 left-55 z-10 w-[280px]">
+
+      {/* 2. Texto posicionado logo abaixo da imagem, alinhado com ela. */}
+      <div className="absolute top-115 left-50 z-10 w-[280px] text-white text-center">
+        <h1 className="text-3xl lg:text-4xl font-bold uppercase tracking-wider text-shadow-lg">
+          DO DESAFIO À <br /> OPORTUNIDADE
+        </h1>
+      </div>
+      
+      {/* --- FIM DA ALTERAÇÃO --- */}
+
+      {/* Logo movido para baixo e para a direita */}
+      <div className="absolute bottom-8 right-8 z-10 w-[240px]">
         <Image src="/Grupo Rovema.png" alt="Logo do Grupo Rovema" width={240} height={66} style={{ objectFit: 'contain' }} />
       </div>
 
@@ -59,7 +71,6 @@ export default function OutraPagina() {
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
           animate={{
-            // <-- 4. ATUALIZAR LÓGICA DE VISIBILIDADE
             opacity: itemAtual || mostrarDetalheCliente ? 0 : 1,
             scale: itemAtual || mostrarDetalheCliente ? 0.9 : 1,
             pointerEvents: itemAtual || mostrarDetalheCliente ? 'none' : 'auto',
@@ -71,7 +82,7 @@ export default function OutraPagina() {
             itensOrbitaInterna={labelsInternos} 
             itensOrbitaExterna={labelsExternos}
             onItemClick={handleItemClick}
-            onCentroClick={handleCentroClick} // <-- 5. PASSAR A NOVA FUNÇÃO
+            onCentroClick={handleCentroClick}
             tempo={tempoAnimacao}
           />
         </motion.div>
@@ -89,7 +100,7 @@ export default function OutraPagina() {
           )}
         </AnimatePresence>
         
-        {/* <-- 6. ADICIONAR O NOVO COMPONENTE COM AnimatePresence */}
+        {/* AnimatePresence para o DetalheCliente */}
         <AnimatePresence>
           {mostrarDetalheCliente && (
             <DetalheCliente onClose={handleCloseDetalheCliente} />
