@@ -58,8 +58,8 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
   useEffect(() => { setIsMounted(true); }, []);
   
   // <-- MUDANÇA 2: Aumentado o raio das pistas/órbitas -->
-  const pistaInterna = { h: 240, v: 310 };
-  const pistaExterna = { h: 420, v: 480 };
+  const pistaInterna = { h: 320, v: 280 };
+  const pistaExterna = { h: 550, v: 390 };
   
   const angulosOrbitaExterna = [
     90, 141.43, 192.86, 244.29, 295.71, 347.14, 38.57
