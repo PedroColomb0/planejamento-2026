@@ -21,6 +21,7 @@ type Props = {
   itensOrbitaExterna: string[];
   onItemClick: (item: string) => void;
   tempo: MotionValue<number>;
+  onCentroClick: () => void;
 };
 
 const Bola = ({ texto, tempo, anguloInicial, raioHorizontal, raioVertical, variant, multiplicadorVelocidade, onClick }: BolaProps) => {
@@ -52,7 +53,7 @@ const Bola = ({ texto, tempo, anguloInicial, raioHorizontal, raioVertical, varia
   );
 };
 
-export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, itensOrbitaExterna, onItemClick, tempo }: Props) {
+export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, itensOrbitaExterna, onItemClick, tempo, onCentroClick }: Props) {
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => { setIsMounted(true); }, []);
   
@@ -88,6 +89,7 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
       {/* NOVO BLOCO CENTRAL: Adicionado layout flexível e o texto CLIENTE */}
       <motion.div 
         className="z-10 flex flex-col items-center justify-center -translate-y-2" // Coluna flexível para alinhar imagem e texto
+        onClick={onCentroClick}
         animate={{ filter: ["drop-shadow(0 0 10px #06b6d4)", "drop-shadow(0 0 20px #06b6d4)", "drop-shadow(0 0 10px #06b6d4)"] }} 
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       >
