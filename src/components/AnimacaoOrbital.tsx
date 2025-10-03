@@ -37,7 +37,7 @@ const Bola = ({ texto, tempo, anguloInicial, raioHorizontal, raioVertical, varia
   const styleClasses = variant === 'inner' ? innerStyle : outerStyle;
   
   // <-- MUDANÇA 1: Aumentado o tamanho das bolas e da fonte -->
-  const sizeClasses = variant === 'inner' ? "w-24 h-24" : "w-32 h-32";
+  const sizeClasses = variant === 'inner' ? "w-26 h-26" : "w-32 h-32";
   const spanClasses = variant === 'outer' ? "font-bold text-sm uppercase text-center leading-tight p-1" : 
                                             "font-bold text-base tracking-widest uppercase";
 
