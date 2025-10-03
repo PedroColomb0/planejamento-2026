@@ -1,4 +1,4 @@
-// components/AnimacaoOrbital.tsx
+// components/AnimacaoOrbital.tsx (Código completo e atualizado)
 
 "use client";
 
@@ -36,7 +36,6 @@ const Bola = ({ texto, tempo, anguloInicial, raioHorizontal, raioVertical, varia
   const outerStyle = "bg-gradient-to-br from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/50";
   const styleClasses = variant === 'inner' ? innerStyle : outerStyle;
   
-  // <-- MUDANÇA 1: Aumentado o tamanho das bolas e da fonte -->
   const sizeClasses = variant === 'inner' ? "w-26 h-26" : "w-32 h-32";
   const spanClasses = variant === 'outer' ? "font-bold text-sm uppercase text-center leading-tight p-1" : 
                                             "font-bold text-base tracking-widest uppercase";
@@ -57,18 +56,15 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => { setIsMounted(true); }, []);
   
-  // <-- MUDANÇA 2: Aumentado o raio das pistas/órbitas -->
   const pistaInterna = { h: 320, v: 265 };
   const pistaExterna = { h: 550, v: 400 };
   
-  const angulosOrbitaExterna = [
-    90, 141.43, 192.86, 244.29, 295.71, 347.14, 38.57
-  ];
+  // <-- MUDANÇA 1: Ajustado os ângulos para 6 itens, distribuindo-os uniformemente -->
+  const angulosOrbitaExterna = Array.from({ length: 6 }, (_, i) => i * 60); // 360 / 6 = 60 graus por item
 
   if (!isMounted) { return null; }
 
   return (
-    // <-- MUDANÇA 3: Aumentado o tamanho do contêiner geral -->
     <motion.div 
       className="relative flex items-center justify-center w-[900px] h-[1000px]"
       style={{ x: 0 }} 
@@ -86,7 +82,6 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
         animate={{ filter: ["drop-shadow(0 0 10px #06b6d4)", "drop-shadow(0 0 20px #06b6d4)", "drop-shadow(0 0 10px #06b6d4)"] }} 
         transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
       >
-        {/* <-- MUDANÇA 4: Aumentado o tamanho da imagem central --> */}
         <Image
           src={imagemCentral}
           width={250}
@@ -99,7 +94,7 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
         </span>
       </motion.div>
       
-      {/* Renderização da Órbita Interna */}
+      {/* Renderização da Órbita Interna (sem alterações) */}
       {Array.from({ length: itensOrbitaInterna.length }).map((_, index) => {
         const angulo = (index / itensOrbitaInterna.length) * 360;
         return (
@@ -116,10 +111,23 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
         );
       })}
 
-      {/* Renderização da Órbita Externa */}
+      {/* Renderização da Órbita Externa (COM alterações) */}
       {Array.from({ length: itensOrbitaExterna.length }).map((_, index) => {
         const angulo = angulosOrbitaExterna[index % angulosOrbitaExterna.length];
         const textoExterno = itensOrbitaExterna[index];
+
+        // <-- MUDANÇA 2: Lógica de clique condicional -->
+        const handleClick = () => {
+          // Se o texto da bola for "CORPORATIVO", chamamos a função de clique
+          // passando "PROJETOS" como o item a ser buscado nos dados.
+          if (textoExterno === "CORPORATIVO") {
+            onItemClick("PROJETOS");
+          } else {
+            // Para todas as outras bolas, o comportamento é o normal.
+            onItemClick(textoExterno);
+          }
+        };
+
         return (
           <Bola 
             key={`outer-${textoExterno}`}
@@ -130,7 +138,7 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
             raioVertical={pistaExterna.v} 
             variant="outer" 
             multiplicadorVelocidade={0}
-            onClick={() => onItemClick(textoExterno)} 
+            onClick={handleClick} // Usamos a nossa nova função de clique
           />
         );
       })}

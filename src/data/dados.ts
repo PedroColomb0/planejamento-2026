@@ -1,19 +1,18 @@
-// dados.ts
+// data/dados.ts (Código atualizado)
 
 export const dadosHierarquicos: { [key: string]: string[] } = {
   // =========================================================
-  // NÍVEL 1: Itens da Órbita Externa (7 itens)
+  // NÍVEL 1: Itens da Órbita Externa (Agora serão 6 itens)
   // =========================================================
   "AGRONEGÓCIOS": [
     "CRÉDITO DE CARBONO", "SOJA", "MILHO", "SILAGEM", "FÁBRICA", 
     "PARCERIAS", "SECADOR", "BOITEL", "CONFINAMENTO", "MANEJO FLORESTAL", 
-    // SEPARAÇÃO SOLICITADA:
     "CRIA E RECRIA", 
     "GÉNETICA P.O", 
     "LOCAÇÃO TRANSPORTE"
   ],
   "VEÍCULOS PESADOS": [
-    "AGRO / CÁLCARIO / BOI / GRÃO / CAFÉ", // Agrupamento de Calcário, Boi, Grão, Café
+    "AGRO / CÁLCARIO / BOI / GRÃO / CAFÉ",
     "COMBUSTÍVEIS", "VENDAS ONLINE", "ATACADOS", "CWS", 
     "CONTRATO DE MANUTENÇÃO", "FRIGORÍFICOS", "MATERIAIS DE CONSTRUÇÃO", 
     "VENDA DE MOTORES", "LOCAÇÃO", "PNEU", "CONSÓRCIO"
@@ -29,7 +28,7 @@ export const dadosHierarquicos: { [key: string]: string[] } = {
     "CENTRAL SEMINOVOS", "D` PASCHOAL", "LOCADORA"
   ],
   "SERVIÇOS FINANCEIROS": [
-    "DADOS / FLUXO CAIXA", // Agrupamento de Dados e Fluxo de Caixa
+    "DADOS / FLUXO CAIXA",
     "UZZIPAY", "BIONIO", "CARTÕES ADMINISTRATIVO", 
     "MESA DE CRÉDITO", "LINHAS DE CRÉDITO", "FUNDOS"
   ],
@@ -37,18 +36,19 @@ export const dadosHierarquicos: { [key: string]: string[] } = {
     "SOLAR", "AMAZONAS PROJETO", "TÉRMICA", 
     "HIDRÁULICA", "P.P.P ILUMINAÇÃO PÚBLICA", "BATERIAS", 
     "SERVIÇOS", "GASPAR", "GERADORES", 
-    "COMERCIALIZADORA", // Item clicável
+    "COMERCIALIZADORA",
     "MERCADO LIVRE"
   ],
-  "PROJETOS": [
+  "PROJETOS": [ // A chave continua "PROJETOS"
     "INTRANET", "INDIQUE CERTO", "DATA LAKE", "FÁBRICA BIOINSUMO", 
-    "BIOECONOMIA - FLORESTA", "VENDAS ON-LINE", "APP GRUPO", "UNIFICAÇÃO DE CADASTRO"
-    , "RASTREABILIDADE / GADO / SOJA / RAÇÃO", "INTELIGENCIA ARTIFICIAL", "PROGRAMA DE FIDELIDADE"
-    , "REDE SOCIAL - CLIENTE", "INCLUSÃO / PERTENCIMENTO"
+    "BIOECONOMIA - FLORESTA", "VENDAS ON-LINE", "APP GRUPO", "UNIFICAÇÃO DE CADASTRO",
+    "RASTREABILIDADE / GADO / SOJA / RAÇÃO", "INTELIGENCIA ARTIFICIAL", "PROGRAMA DE FIDELIDADE",
+    "REDE SOCIAL - CLIENTE", "INCLUSÃO / PERTENCIMENTO",
+    "LICITAÇÃO" // <-- ALTERAÇÃO AQUI: Adicionado para navegar para os detalhes de Licitação
   ],
 
   // =========================================================
-  // NÍVEL 2 (e Subsequentes): Detalhes de Subitens clicáveis 
+  // NÍVEL 2 (e Subsequentes): Detalhes de Subitens clicáveis  
   // =========================================================
   
   "DADOS / FLUXO CAIXA": ["Indicadores", "Relatórios", "Dashboards", "Orçamento"],
@@ -56,7 +56,4 @@ export const dadosHierarquicos: { [key: string]: string[] } = {
   "AGRO / VEÍCULOS PESADOS": ["CALCÁRIO", "BOI", "GRÃO", "CAFÉ"],
 
   "COMERCIALIZADORA": ["Subitem Comercializadora 1", "Subitem Comercializadora 2"], 
-
-  // Novos Detalhes (se necessário) - Por enquanto, CRIA E RECRIA e GÉNETICA P.O
-  // não têm sub-níveis de detalhe, então não precisam de chaves aqui.
 };

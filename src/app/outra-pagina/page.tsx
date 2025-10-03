@@ -1,5 +1,3 @@
-// outra-pagina.tsx (Código com a alteração)
-
 "use client";
 
 import { useState, useEffect, useRef } from "react";
@@ -26,7 +24,9 @@ export default function OutraPagina() {
   }, [tempoAnimacao]);
 
   const labelsInternos = ["MARKETING", "CRM", "APLICATIVO", "EVENTOS", "CAMPANHAS", "SITE", "LEAD", "WHATSAPP"];
-  const labelsExternos = ["AGRONEGÓCIOS", "VEÍCULOS PESADOS", "LICITAÇÃO", "VEÍCULOS LEVES", "SERVIÇOS FINANCEIROS", "ENERGIA", "PROJETOS"];
+  
+  // Array ajustado conforme a solicitação
+  const labelsExternos = ["AGRONEGÓCIOS", "VEÍCULOS PESADOS", "VEÍCULOS LEVES", "SERVIÇOS FINANCEIROS", "ENERGIA", "CORPORATIVO"];
   
   const itemAtual = hierarquia.length > 0 ? hierarquia[hierarquia.length - 1] : null;
   const subItensAtuais = itemAtual ? dadosHierarquicos[itemAtual] || [] : [];
@@ -45,9 +45,8 @@ export default function OutraPagina() {
   return (
     <main className="relative flex flex-col items-center justify-center h-screen overflow-hidden">
       
-      {/* --- INÍCIO DA ALTERAÇÃO (CABEÇA E TEXTO FIXOS) --- */}
+      {/* --- CABEÇA E TEXTO FIXOS --- */}
       <div className="fixed top-8 left-8 z-10 w-[280px]">
-        {/* Imagem da Cabeça */}
         <div className="animate-head-beat-slow">
           <Image 
             src="/circulo-cabeca.png" 
@@ -58,22 +57,21 @@ export default function OutraPagina() {
           />
         </div>
         
-        {/* Texto posicionado em relação ao container */}
         <div className="relative text-white text-center mt-[-30px]">
           <h1 className="text-3xl lg:text-4xl font-bold uppercase tracking-wider text-shadow-lg">
             DO DESAFIO À <br /> OPORTUNIDADE
           </h1>
         </div>
       </div>
-      {/* --- FIM DA ALTERAÇÃO --- */}
-
+      
+      {/* --- LOGO FIXA --- */}
       <div className="absolute bottom-8 right-8 z-10 w-[240px]">
         <Image src="/Grupo Rovema.png" alt="Logo do Grupo Rovema" width={240} height={66} style={{ objectFit: 'contain' }} />
       </div>
 
       <div className="relative w-full h-full flex items-center justify-center z-20">
         
-        {/* --- INÍCIO DA ADIÇÃO DOS OLHOS --- */}
+        {/* --- OLHOS INTERATIVOS --- */}
         <div 
           className="absolute z-30" 
           style={{ top: 'calc(50% - 156px)', left: 'calc(50% - 14px)' }}
@@ -86,8 +84,8 @@ export default function OutraPagina() {
         >
           <OlhoInterativo />
         </div>
-        {/* --- FIM DA ADIÇÃO DOS OLHOS --- */}
 
+        {/* --- ANIMAÇÃO ORBITAL PRINCIPAL --- */}
         <motion.div
           className="absolute inset-0 flex items-center justify-center"
           animate={{
@@ -107,6 +105,7 @@ export default function OutraPagina() {
           />
         </motion.div>
 
+        {/* --- JANELA DE DETALHE DOS ITENS --- */}
         <AnimatePresence>
           {itemAtual && (
             <DetalheItem
@@ -119,6 +118,7 @@ export default function OutraPagina() {
           )}
         </AnimatePresence>
         
+        {/* --- JANELA DE DETALHE DO CLIENTE --- */}
         <AnimatePresence>
           {mostrarDetalheCliente && (
             <DetalheCliente onClose={handleCloseDetalheCliente} />
