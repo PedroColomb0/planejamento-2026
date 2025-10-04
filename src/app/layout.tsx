@@ -3,8 +3,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-// import AnimacaoPagina from "@/components/AnimacaoPagina"; // 1. Linha removida/comentada
 import FundoTecnologico from "@/components/FundoTecnologico";
+import AnimacaoPaginaSuave from "@/components/AnimacaoPaginaSuave"; // 1. Importe o novo componente
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,7 +22,10 @@ export default function RootLayout({
     <html lang="pt-br">
       <body className={inter.className}>
         <FundoTecnologico />
-        {children} 
+        {/* 2. Envolva o {children} com o novo componente */}
+        <AnimacaoPaginaSuave>
+          {children}
+        </AnimacaoPaginaSuave>
       </body>
     </html>
   );

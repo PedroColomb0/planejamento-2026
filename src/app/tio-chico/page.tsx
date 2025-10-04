@@ -2,15 +2,18 @@
 
 "use client";
 
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation"; // REMOVIDO: Não precisamos mais do router
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 
 export default function TioChicoPage() {
-  const router = useRouter();
+  // const router = useRouter(); // REMOVIDO
 
   const handleNavigate = () => {
-    router.push("/outra-pagina");
+    // ALTERAÇÃO AQUI:
+    // Trocamos 'router.push' por 'window.location.href'.
+    // Isso força um recarregamento completo da página.
+    window.location.href = "/outra-pagina";
   };
 
   const texto = "Oi, time Grupo Rovema! Muito prazer, eu sou o Tio Chico, mas vocês também podem me chamar de cliente. A partir do Planejamento Estratégico de 2026, estarei no centro das estratégias e decisões, acompanhando de perto cada detalhe, iniciativa e ação. Reforçarei sempre a importância de compreenderem minhas necessidades e expectativas, para que juntos possamos impulsionar o crescimento do nosso grupo."
@@ -25,18 +28,11 @@ export default function TioChicoPage() {
   };
 
   const charVariants: Variants = {
-    hidden: {
-      opacity: 0,
-      y: 10,
-    },
+    hidden: { opacity: 0, y: 10 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        type: "spring",
-        damping: 12,
-        stiffness: 200,
-      },
+      transition: { type: "spring", damping: 12, stiffness: 200 },
     },
   };
   
@@ -54,6 +50,7 @@ export default function TioChicoPage() {
       onClick={handleNavigate}
       className="relative flex flex-col md:flex-row items-center justify-center h-screen overflow-hidden cursor-pointer p-8"
     >
+      {/* O resto do seu código JSX continua exatamente o mesmo */}
       <div className="fixed top-8 left-8 z-10 w-[280px]">
         <div className="animate-head-beat-slow">
           <Image 
@@ -89,13 +86,11 @@ export default function TioChicoPage() {
         />
       </motion.div>
 
-      {/* --- BALÃO DE FALA --- */}
       <motion.div
         initial={{ opacity: 0, x: -50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
         className="relative mt-8 md:mt-0 md:ml-8 max-w-4xl bg-slate-900/80 backdrop-blur-md border border-cyan-500 rounded-2xl p-10 shadow-2xl shadow-cyan-500/30"
-        // A LINHA onClick com stopPropagation() FOI REMOVIDA DAQUI
       >
         <motion.p
           className="text-white text-xl lg:text-2xl leading-relaxed"

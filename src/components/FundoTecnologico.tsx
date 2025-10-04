@@ -1,3 +1,5 @@
+// components/FundoTecnologico.tsx
+
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
@@ -7,12 +9,22 @@ import { loadFull } from "tsparticles";
 
 export default function FundoTecnologico() {
   const [init, setInit] = useState(false);
+  const [visible, setVisible] = useState(false); // <-- 1. NOVO ESTADO DE VISIBILIDADE
 
   useEffect(() => {
     initParticlesEngine(async (engine: Engine) => {
       await loadFull(engine);
     }).then(() => {
       setInit(true);
+      // <-- 2. ATRASO PARA RENDERIZAR
+      // Após a inicialização, esperamos 500ms para tornar as partículas visíveis.
+      // Isso dá tempo para o conteúdo principal da página carregar primeiro.
+      const timer = setTimeout(() => {
+        setVisible(true);
+      }, 500);
+
+      // Limpa o timer se o componente for desmontado antes do tempo
+      return () => clearTimeout(timer);
     });
   }, []);
 
@@ -22,81 +34,44 @@ export default function FundoTecnologico() {
 
   const options: ISourceOptions = useMemo(
     () => ({
-      background: {
-        color: {
-          value: "transparent",
-        },
-      },
-      // Otimização 1: Limitar o FPS para 40. 60 é ótimo, mas 40 já é fluido e economiza recursos.
+      // ... (o resto das suas opções continua exatamente igual) ...
+      background: { color: { value: "transparent" } },
       fpsLimit: 40,
       interactivity: {
-        events: {
-          onHover: {
-            enable: true,
-            mode: "repulse",
-          },
-        },
-        modes: {
-          repulse: {
-            // Otimização 2: Reduzir a distância da repulsão. Menos partículas serão afetadas pelo mouse.
-            distance: 80,
-            duration: 0.4,
-          },
-        },
+        events: { onHover: { enable: true, mode: "repulse" } },
+        modes: { repulse: { distance: 80, duration: 0.4 } },
       },
       particles: {
-        color: {
-          value: "#00bfff", // Deep Sky Blue
-        },
-        shadow: {
-          enable: true,
-          color: "#00bfff",
-          // Otimização 3: Reduzir o blur do brilho. Efeitos de blur são custosos para o navegador.
-          blur: 5,
-        },
+        color: { value: "#00bfff" },
+        shadow: { enable: true, color: "#00bfff", blur: 5 },
         links: {
           color: "#ffffff",
           distance: 150,
           enable: true,
-          // Otimização 4: Deixar as linhas um pouco mais sutis para diminuir o impacto visual e de processamento.
           opacity: 0.2,
           width: 1,
         },
         move: {
           direction: "none",
           enable: true,
-          outModes: {
-            default: "bounce",
-          },
+          outModes: { default: "bounce" },
           random: false,
           speed: 1,
           straight: false,
         },
-        number: {
-          density: {
-            enable: true,
-          },
-          // Otimização 5: A MAIS IMPORTANTE! Reduzir o número de partículas.
-          // Menos partículas = menos cálculos = mais performance.
-          value: 80,
-        },
-        opacity: {
-          value: 0.7,
-        },
-        shape: {
-          type: "circle",
-        },
-        size: {
-          // Otimização 6: Diminuir o tamanho máximo das partículas.
-          value: { min: 1, max: 3 },
-        },
+        number: { density: { enable: true }, value: 80 },
+        opacity: { value: 0.7 },
+        shape: { type: "circle" },
+        size: { value: { min: 1, max: 3 } },
       },
       detectRetina: true,
     }),
     [],
   );
 
-  if (init) {
+  // <-- 3. CONDIÇÃO DE RENDERIZAÇÃO ATUALIZADA
+  // As partículas só serão renderizadas se 'init' e 'visible' forem verdadeiros.
+  if (init && visible) {
     return (
       <Particles
         id="tsparticles"
@@ -107,5 +82,5 @@ export default function FundoTecnologico() {
     );
   }
 
-  return <></>;
+  return <></>; // Retorna nulo enquanto não estiver pronto
 }
