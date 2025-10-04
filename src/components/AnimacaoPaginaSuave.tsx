@@ -1,10 +1,8 @@
-// components/AnimacaoPaginaSuave.tsx
-
 "use client";
 
-// 1. Importe o tipo 'Variants' da framer-motion
-import { motion, AnimatePresence, Variants } from "framer-motion";
-import { usePathname } from "next/navigation";
+import { motion, Variants } from "framer-motion";
+// import { AnimatePresence, Variants } from "framer-motion"; // REMOVIDO: AnimatePresence
+// import { usePathname } from "next/navigation"; // REMOVIDO: usePathname
 import { ReactNode } from "react";
 
 type Props = {
@@ -12,9 +10,9 @@ type Props = {
 };
 
 export default function AnimacaoPaginaSuave({ children }: Props) {
-  const pathname = usePathname();
-
-  // 2. Adicione a tipagem explícita aqui -> const variants: Variants
+  // const pathname = usePathname(); // REMOVIDO
+  
+  // 1. O estado 'exit' não é mais usado, mas mantemos 'hidden' e 'visible'
   const variants: Variants = {
     hidden: { 
       opacity: 0, 
@@ -24,31 +22,25 @@ export default function AnimacaoPaginaSuave({ children }: Props) {
       opacity: 1, 
       filter: 'blur(0px)',
       transition: { 
-        duration: 0.5, 
-        ease: "easeInOut" 
+        duration: 0.8, // Aumentei a duração para um efeito mais perceptível no recarregamento
+        ease: "easeOut" 
       } 
     },
-    exit: { 
-      opacity: 0, 
-      filter: 'blur(8px)',
-      transition: { 
-        duration: 0.3, 
-        ease: "easeInOut" 
-      } 
-    },
+    // exit: { ... } // REMOVIDO
   };
 
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.div
-        key={pathname}
-        variants={variants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-      >
-        {children}
-      </motion.div>
-    </AnimatePresence>
+    // 2. Removemos o AnimatePresence, pois ele só é necessário para
+    // transições de saída quando o roteamento do Next.js está ativo (router.push)
+    <motion.div
+      // key={pathname} // REMOVIDO
+      variants={variants}
+      initial="hidden"
+      animate="visible"
+      // exit="exit" // REMOVIDO
+    >
+      {children}
+    </motion.div>
+    // 3. O componente agora funciona apenas como um "wrapper" de animação de entrada (mount)
   );
 }
