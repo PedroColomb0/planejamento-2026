@@ -25,17 +25,36 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
   const containerVariants = { /* ... */ };
   const itemVariants = { /* ... */ };
 
+  // FUNÇÃO DE FORMATAÇÃO (REVISADA para 4 linhas)
+  const formatText = (text: string) => {
+    const lines = text.split('|');
+    const isMultiLine = lines.length > 1;
+    
+    return lines.map((line, index, arr) => (
+      <span key={index}>
+        {line}
+        
+        {/* Divisor: aparece após o primeiro elemento (index 0) */}
+        {index === 0 && isMultiLine && (
+          <span className="block h-[2px] w-8 bg-white mx-auto my-1 rounded-full opacity-70"></span>
+        )}
+        
+        {/* Quebra de linha simples: aparece após o segundo (GADO) e terceiro (SOJA) itens */}
+        {/* Usamos index > 0 para pular o item 0, e index < arr.length - 1 para pular o último. */}
+        {index > 0 && index < arr.length - 1 && isMultiLine && <br />}
+
+      </span>
+    ));
+  };
+  // FIM DA FUNÇÃO DE FORMATAÇÃO
+
   // Define a função de clique para o centro
   const handleCentralClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     
-    // ATUALIZAÇÃO AQUI: Apenas "PROJETOS" tem um atalho de clique central específico.
-    // "LICITAÇÃO" agora é um item de primeiro nível e seu clique central não faz nada por padrão,
-    // a não ser que você queira que ele navegue para outro lugar.
     if (titulo === "PROJETOS") {
-      // O clique central de PROJETOS ainda navega para LICITAÇÃO
       onSubItemClick("LICITAÇÃO");
-    } 
+    }  
   };
 
   // VARIÁVEL AUXILIAR: Verifica se o subtítulo "CORPORATIVO" deve ser exibido
@@ -44,7 +63,6 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
 
   return (
     <motion.div
-      // ALTERAÇÃO FEITA AQUI: Removidas as classes 'bg-black/50' e 'backdrop-blur-md'
       className="fixed top-0 left-0 w-full h-full z-30 flex items-center justify-center"
       onClick={onClose}
       initial={{ opacity: 0 }}
@@ -81,24 +99,24 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
         </svg>
         
         <motion.div 
-          variants={itemVariants}           
+          variants={itemVariants}            
           className="w-78 h-78 rounded-full flex flex-col items-center justify-center z-10 bg-gradient-to-br from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/50"
           onClick={handleCentralClick}
         >
           <h1 className="text-3xl text-center font-bold text-white uppercase tracking-widest px-4">{titulo}</h1>
 
-          {/* NOVO CÓDIGO AQUI: O subtítulo agora aparece para PROJETOS OU LICITAÇÃO */}
           {deveMostrarSubtituloCorporativo && (
             <p className="text-xl text-center font-bold uppercase text-yellow-400 mt-2 border-t pt-2 border-yellow-400/50">
               CORPORATIVO
             </p>
           )}
-          {/* FIM DO NOVO CÓDIGO */}
 
         </motion.div>
 
         {subItens.map((item, index) => {
-          // ... código restante para renderizar subItens
+          // Garante que a chave de navegação é a correta: 'RASTREABILIDADE / GADO / SOJA / RAÇÃO'
+          const proximaChave = item.replace(/\|/g, ' / '); 
+          
           const anguloGraus = (index * (360 / subItens.length)) + anguloOffset;
           const anguloRadianos = anguloGraus * (Math.PI / 180);
           const x = raioOrbita * Math.cos(anguloRadianos);
@@ -108,14 +126,14 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
             <motion.div
               key={item}
               variants={itemVariants}
-              className="absolute w-38 h-38 rounded-full flex items-center justify-center text-center bg-slate-900/80 border-2 border-cyan-400 backdrop-blur-md z-10 cursor-pointer"
+              className="absolute w-38 h-38 rounded-full flex items-center justify-center text-center bg-slate-900/80 border-2 border-cyan-400 backdrop-blur-md z-10 cursor-pointer p-2"
               style={{ top: `calc(50% + ${y}px)`, left: `calc(50% + ${x}px)`, transform: 'translate(-50%, -50%)' }}
               onClick={(e) => {
                 e.stopPropagation();
-                onSubItemClick(item);
+                onSubItemClick(proximaChave);
               }}
             >
-              <span className="text-cyan-300 text-sm font-bold uppercase">{item}</span>
+              <span className="text-cyan-300 text-sm font-bold uppercase leading-snug">{formatText(item)}</span>
             </motion.div>
           );
         })}
