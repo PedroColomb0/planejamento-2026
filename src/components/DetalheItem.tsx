@@ -15,7 +15,7 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
   const raioOrbita = 360;
   const containerSize = 800;
   const bolaCentralSize = 256;
-  const subItemSize = 128;
+  const subItemSize = 152;
   const anguloOffset = -90;
 
   const containerCenter = containerSize / 2;
