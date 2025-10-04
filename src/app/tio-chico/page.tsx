@@ -20,7 +20,7 @@ export default function TioChicoPage() {
   // ALTERAÇÃO AQUI: Substituímos a string 'texto' por um array de blocos.
   // Cada objeto define um trecho de texto e se deve ser formatado.
   const textBlocks: TextBlock[] = [
-    { text: "Oi, time " },
+    { text: "Olá" },
     { text: "Grupo Rovema!", isFormatted: true },
     { text: " Muito prazer, eu sou o " },
     { text: "Tio Chico", isFormatted: true },
@@ -31,7 +31,7 @@ export default function TioChicoPage() {
     { text: ", estarei no centro das estratégias e decisões, acompanhando de perto cada detalhe, iniciativa e ação. Reforçarei sempre a importância de compreenderem minhas necessidades e expectativas, para que " },
     { text: "juntos", isFormatted: true },
     { text: " possamos impulsionar o " },
-    { text: "crescimento do nosso grupo", isFormatted: true },
+    { text: "crescimento do grupo", isFormatted: true },
     { text: "." }
   ];
 
