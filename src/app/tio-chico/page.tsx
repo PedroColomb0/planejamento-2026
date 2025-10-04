@@ -21,7 +21,7 @@ export default function TioChicoPage() {
   // Cada objeto define um trecho de texto e se deve ser formatado.
   const textBlocks: TextBlock[] = [
     { text: "Olá" },
-    { text: "Grupo Rovema!", isFormatted: true },
+    { text: " Grupo Rovema!", isFormatted: true },
     { text: " Muito prazer, eu sou o " },
     { text: "Tio Chico", isFormatted: true },
     { text: ", mas vocês também podem me chamar de " },
