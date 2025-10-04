@@ -65,10 +65,19 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
         
         <motion.div 
           variants={itemVariants}           
-          className="w-78 h-78 rounded-full flex items-center justify-center z-10 bg-gradient-to-br from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/50"
+          className="w-78 h-78 rounded-full flex flex-col items-center justify-center z-10 bg-gradient-to-br from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/50"
           onClick={(e) => e.stopPropagation()}
         >
           <h1 className="text-3xl text-center font-bold text-white uppercase tracking-widest px-4">{titulo}</h1>
+
+          {/* NOVO CÓDIGO AQUI: Título secundário condicional */}
+          {titulo === "PROJETOS" && (
+            <p className="text-xl text-center font-bold uppercase text-yellow-400 mt-2 border-t pt-2 border-yellow-400/50">
+              CORPORATIVO
+            </p>
+          )}
+          {/* FIM DO NOVO CÓDIGO */}
+
         </motion.div>
 
         {subItens.map((item, index) => {
