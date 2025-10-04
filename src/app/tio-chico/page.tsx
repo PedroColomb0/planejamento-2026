@@ -2,27 +2,47 @@
 
 "use client";
 
-// import { useRouter } from "next/navigation"; // REMOVIDO: Não precisamos mais do router
 import Image from "next/image";
 import { motion, Variants } from "framer-motion";
 
-export default function TioChicoPage() {
-  // const router = useRouter(); // REMOVIDO
+// Definimos o tipo para os nossos blocos de texto
+type TextBlock = {
+  text: string;
+  isFormatted?: boolean; // Flag para aplicar a formatação
+};
 
+export default function TioChicoPage() {
   const handleNavigate = () => {
-    // ALTERAÇÃO AQUI:
-    // Trocamos 'router.push' por 'window.location.href'.
-    // Isso força um recarregamento completo da página.
+    // ALTERAÇÃO: Trocamos 'router.push' por 'window.location.href' para recarregar.
     window.location.href = "/outra-pagina";
   };
 
-  const texto = "Oi, time Grupo Rovema! Muito prazer, eu sou o Tio Chico, mas vocês também podem me chamar de cliente. A partir do Planejamento Estratégico de 2026, estarei no centro das estratégias e decisões, acompanhando de perto cada detalhe, iniciativa e ação. Reforçarei sempre a importância de compreenderem minhas necessidades e expectativas, para que juntos possamos impulsionar o crescimento do nosso grupo."
-  const caracteres = Array.from(texto);
+  // ALTERAÇÃO AQUI: Substituímos a string 'texto' por um array de blocos.
+  // Cada objeto define um trecho de texto e se deve ser formatado.
+  const textBlocks: TextBlock[] = [
+    { text: "Oi, time " },
+    { text: "Grupo Rovema!", isFormatted: true },
+    { text: " Muito prazer, eu sou o " },
+    { text: "Tio Chico", isFormatted: true },
+    { text: ", mas vocês também podem me chamar de " },
+    { text: "cliente", isFormatted: true },
+    { text: ". A partir do " },
+    { text: "Planejamento Estratégico de 2026", isFormatted: true },
+    { text: ", estarei no centro das estratégias e decisões, acompanhando de perto cada detalhe, iniciativa e ação. Reforçarei sempre a importância de compreenderem minhas necessidades e expectativas, para que " },
+    { text: "juntos", isFormatted: true },
+    { text: " possamos impulsionar o " },
+    { text: "crescimento do nosso grupo", isFormatted: true },
+    { text: "." }
+  ];
+
+  // Calculamos o número total de caracteres para ajustar o delay do botão
+  const totalCaracteres = textBlocks.reduce((acc, block) => acc + block.text.length, 0);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
-    visible: (i = 1) => ({
+    visible: () => ({
       opacity: 1,
+      // O delayChildren deve ser ajustado para o total de caracteres mapeados
       transition: { staggerChildren: 0.02, delayChildren: 0.5 },
     }),
   };
@@ -35,22 +55,26 @@ export default function TioChicoPage() {
       transition: { type: "spring", damping: 12, stiffness: 200 },
     },
   };
-  
+    
   const buttonVariants: Variants = {
     hidden: { opacity: 0, y: 20 },
     visible: { 
       opacity: 1, 
       y: 0,
-      transition: { delay: caracteres.length * 0.02 + 1, duration: 0.5 }
+      // O delay deve usar o número total de caracteres (totalCaracteres)
+      transition: { delay: totalCaracteres * 0.02 + 1, duration: 0.5 }
     }
   };
+
+  // Variáveis para a classe de formatação
+  const formattedClass = "font-bold text-yellow-400";
 
   return (
     <main
       onClick={handleNavigate}
       className="relative flex flex-col md:flex-row items-center justify-center h-screen overflow-hidden cursor-pointer p-8"
     >
-      {/* O resto do seu código JSX continua exatamente o mesmo */}
+      {/* O resto do seu código JSX... */}
       <div className="fixed top-8 left-8 z-10 w-[280px]">
         <div className="animate-head-beat-slow">
           <Image 
@@ -98,11 +122,37 @@ export default function TioChicoPage() {
           initial="hidden"
           animate="visible"
         >
-          {caracteres.map((char, index) => (
-            <motion.span key={index} variants={charVariants}>
-              {char}
-            </motion.span>
-          ))}
+          {/* ALTERAÇÃO NA RENDERIZAÇÃO: Mapeamos os blocos de texto */}
+          {textBlocks.map((block, blockIndex) => {
+            const caracteres = Array.from(block.text);
+            
+            // Se o bloco é formatado, envolvemos os caracteres animados
+            // em um span com a formatação (negrito e amarelo)
+            if (block.isFormatted) {
+              return (
+                <span key={`block-${blockIndex}`} className={formattedClass}>
+                  {caracteres.map((char, charIndex) => (
+                    <motion.span 
+                      key={`char-${blockIndex}-${charIndex}`} 
+                      variants={charVariants}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </span>
+              );
+            }
+
+            // Se o bloco não é formatado, apenas mapeamos os caracteres
+            return caracteres.map((char, charIndex) => (
+              <motion.span 
+                key={`char-${blockIndex}-${charIndex}`} 
+                variants={charVariants}
+              >
+                {char}
+              </motion.span>
+            ));
+          })}
         </motion.p>
         
         <motion.div 
