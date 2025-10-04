@@ -15,7 +15,8 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
   const raioOrbita = 360;
   const containerSize = 800;
   const bolaCentralSize = 256;
-  const subItemSize = 152;
+  // NOVO TAMANHO: Aumentado de 152 para 164 (ou o valor desejado)
+  const subItemSize = 164; 
   const anguloOffset = -90;
 
   const containerCenter = containerSize / 2;
@@ -99,7 +100,8 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
         </svg>
         
         <motion.div 
-          variants={itemVariants}            
+          variants={itemVariants}           
+          // O tamanho (w-78 h-78) da bola central não foi alterado.
           className="w-78 h-78 rounded-full flex flex-col items-center justify-center z-10 bg-gradient-to-br from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/50"
           onClick={handleCentralClick}
         >
@@ -126,8 +128,17 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
             <motion.div
               key={item}
               variants={itemVariants}
-              className="absolute w-38 h-38 rounded-full flex items-center justify-center text-center bg-slate-900/80 border-2 border-cyan-400 backdrop-blur-md z-10 cursor-pointer p-2"
-              style={{ top: `calc(50% + ${y}px)`, left: `calc(50% + ${x}px)`, transform: 'translate(-50%, -50%)' }}
+              // REMOVIDO: Classes de tamanho não-padrão (w-38 h-38).
+              // MANTIDO: O resto das classes de estilo.
+              className="absolute rounded-full flex items-center justify-center text-center bg-slate-900/80 border-2 border-cyan-400 backdrop-blur-md z-10 cursor-pointer p-2"
+              // ADICIONADO: Tamanho dinâmico usando a variável 'subItemSize'
+              style={{ 
+                width: `${subItemSize}px`, 
+                height: `${subItemSize}px`, 
+                top: `calc(50% + ${y}px)`, 
+                left: `calc(50% + ${x}px)`, 
+                transform: 'translate(-50%, -50%)' 
+              }}
               onClick={(e) => {
                 e.stopPropagation();
                 onSubItemClick(proximaChave);
