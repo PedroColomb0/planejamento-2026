@@ -1,8 +1,9 @@
+// components/AnimacaoPaginaSuave.tsx
+
 "use client";
 
-import { motion, Variants } from "framer-motion";
-// import { AnimatePresence, Variants } from "framer-motion"; // REMOVIDO: AnimatePresence
-// import { usePathname } from "next/navigation"; // REMOVIDO: usePathname
+import { motion, Variants, AnimatePresence } from "framer-motion"; // 🔑 Reintroduzido AnimatePresence
+import { usePathname } from "next/navigation"; // 🔑 Reintroduzido usePathname
 import { ReactNode } from "react";
 
 type Props = {
@@ -10,9 +11,8 @@ type Props = {
 };
 
 export default function AnimacaoPaginaSuave({ children }: Props) {
-  // const pathname = usePathname(); // REMOVIDO
+  const pathname = usePathname(); // 🔑 Obtém a rota atual
   
-  // 1. O estado 'exit' não é mais usado, mas mantemos 'hidden' e 'visible'
   const variants: Variants = {
     hidden: { 
       opacity: 0, 
@@ -22,25 +22,35 @@ export default function AnimacaoPaginaSuave({ children }: Props) {
       opacity: 1, 
       filter: 'blur(0px)',
       transition: { 
-        duration: 0.8, // Aumentei a duração para um efeito mais perceptível no recarregamento
+        duration: 0.8,
         ease: "easeOut" 
       } 
     },
-    // exit: { ... } // REMOVIDO
+    // 🔑 Reintroduzida a animação de saída (exit)
+    exit: { 
+        opacity: 0, 
+        filter: 'blur(8px)',
+        transition: { 
+            duration: 0.5, 
+            ease: "easeIn" 
+        }
+    }
   };
 
   return (
-    // 2. Removemos o AnimatePresence, pois ele só é necessário para
-    // transições de saída quando o roteamento do Next.js está ativo (router.push)
-    <motion.div
-      // key={pathname} // REMOVIDO
-      variants={variants}
-      initial="hidden"
-      animate="visible"
-      // exit="exit" // REMOVIDO
-    >
-      {children}
-    </motion.div>
-    // 3. O componente agora funciona apenas como um "wrapper" de animação de entrada (mount)
+    // 🔑 Envolve o conteúdo com AnimatePresence para lidar com a animação de saída de rota
+    <AnimatePresence mode="wait"> 
+      <motion.div
+        key={pathname} // 🔑 A chave da rota é crucial para AnimatePresence
+        variants={variants}
+        initial="hidden"
+        animate="visible"
+        exit="exit" // 🔑 Aplica a animação de saída
+        // Garante que ocupe todo o espaço da tela
+        className="w-full h-full min-h-screen" 
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
   );
 }
