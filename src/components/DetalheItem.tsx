@@ -15,18 +15,26 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
   const raioOrbita = 360;
   const containerSize = 800;
   const bolaCentralSize = 256;
-  // NOVO TAMANHO: Aumentado de 152 para 164 (ou o valor desejado)
-  const subItemSize = 164; 
+  
+  // 1. TAMANHOS MÁXIMOS DEFINIDOS (Padronizado no maior tamanho)
+  const subItemSizePadrao = 164; // NOVO TAMANHO MAIOR (era 152)
+  const subItemSizeMenor = 152;  // TAMANHO MENOR solicitado (o equivalente ao seu 'w-38')
+  
+  // 2. VARIÁVEL DE AJUSTE: Verifica se o círculo atual é o que precisa ser reduzido
+  // Se o título principal for 'VEÍCULOS LEVES', usaremos o tamanho menor.
+  const subItemSize = titulo === "VEÍCULOS LEVES" ? subItemSizeMenor : subItemSizePadrao;
+  
   const anguloOffset = -90;
 
   const containerCenter = containerSize / 2;
   const raioBolaCentral = bolaCentralSize / 2;
-  const raioSubItem = subItemSize / 2;
+  // Agora 'raioSubItem' é dinâmico, baseado no título do componente
+  const raioSubItem = subItemSize / 2; 
   
   const containerVariants = { /* ... */ };
   const itemVariants = { /* ... */ };
 
-  // FUNÇÃO DE FORMATAÇÃO (REVISADA para 4 linhas)
+  // FUNÇÃO DE FORMATAÇÃO (MANTIDA)
   const formatText = (text: string) => {
     const lines = text.split('|');
     const isMultiLine = lines.length > 1;
@@ -49,7 +57,7 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
   };
   // FIM DA FUNÇÃO DE FORMATAÇÃO
 
-  // Define a função de clique para o centro
+  // Define a função de clique para o centro (MANTIDA)
   const handleCentralClick = (e: React.MouseEvent) => {
     e.stopPropagation();
     
@@ -58,7 +66,7 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
     }  
   };
 
-  // VARIÁVEL AUXILIAR: Verifica se o subtítulo "CORPORATIVO" deve ser exibido
+  // VARIÁVEL AUXILIAR: Verifica se o subtítulo "CORPORATIVO" deve ser exibido (MANTIDA)
   const deveMostrarSubtituloCorporativo = titulo === "PROJETOS" || titulo === "LICITAÇÃO";
 
 
@@ -84,6 +92,8 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
             const anguloRadianos = anguloGraus * (Math.PI / 180);
             const startX = containerCenter + raioBolaCentral * Math.cos(anguloRadianos);
             const startY = containerCenter + raioBolaCentral * Math.sin(anguloRadianos);
+            
+            // O cálculo da posição final AGORA usa 'raioSubItem' que já é dinâmico
             const endX = containerCenter + (raioOrbita - raioSubItem) * Math.cos(anguloRadianos);
             const endY = containerCenter + (raioOrbita - raioSubItem) * Math.sin(anguloRadianos);
             
@@ -101,7 +111,6 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
         
         <motion.div 
           variants={itemVariants}           
-          // O tamanho (w-78 h-78) da bola central não foi alterado.
           className="w-78 h-78 rounded-full flex flex-col items-center justify-center z-10 bg-gradient-to-br from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/50"
           onClick={handleCentralClick}
         >
@@ -123,15 +132,15 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
           const anguloRadianos = anguloGraus * (Math.PI / 180);
           const x = raioOrbita * Math.cos(anguloRadianos);
           const y = raioOrbita * Math.sin(anguloRadianos);
-
+          
+          // 3. O 'subItemSize' já está dinâmico, vamos usá-lo!
+          
           return (
             <motion.div
               key={item}
               variants={itemVariants}
-              // REMOVIDO: Classes de tamanho não-padrão (w-38 h-38).
-              // MANTIDO: O resto das classes de estilo.
               className="absolute rounded-full flex items-center justify-center text-center bg-slate-900/80 border-2 border-cyan-400 backdrop-blur-md z-10 cursor-pointer p-2"
-              // ADICIONADO: Tamanho dinâmico usando a variável 'subItemSize'
+              // 4. Aplicamos o tamanho dinâmico 'subItemSize'
               style={{ 
                 width: `${subItemSize}px`, 
                 height: `${subItemSize}px`, 
