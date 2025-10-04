@@ -59,7 +59,7 @@ export default function AnimacaoOrbital({ imagemCentral, itensOrbitaInterna, ite
   const [isMounted, setIsMounted] = useState(false);
   useEffect(() => { setIsMounted(true); }, []);
   
-  const pistaInterna = { h: 320, v: 265 };
+  const pistaInterna = { h: 330, v: 285 };
   const pistaExterna = { h: 550, v: 400 };
   
   const angulosOrbitaExterna = Array.from({ length: 6 }, (_, i) => i * 60); 
