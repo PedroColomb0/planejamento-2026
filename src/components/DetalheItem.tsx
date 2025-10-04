@@ -25,6 +25,23 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
   const containerVariants = { /* ... */ };
   const itemVariants = { /* ... */ };
 
+  // Define a função de clique para o centro
+  const handleCentralClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    
+    // ATUALIZAÇÃO AQUI: Apenas "PROJETOS" tem um atalho de clique central específico.
+    // "LICITAÇÃO" agora é um item de primeiro nível e seu clique central não faz nada por padrão,
+    // a não ser que você queira que ele navegue para outro lugar.
+    if (titulo === "PROJETOS") {
+      // O clique central de PROJETOS ainda navega para LICITAÇÃO
+      onSubItemClick("LICITAÇÃO");
+    } 
+  };
+
+  // VARIÁVEL AUXILIAR: Verifica se o subtítulo "CORPORATIVO" deve ser exibido
+  const deveMostrarSubtituloCorporativo = titulo === "PROJETOS" || titulo === "LICITAÇÃO";
+
+
   return (
     <motion.div
       // ALTERAÇÃO FEITA AQUI: Removidas as classes 'bg-black/50' e 'backdrop-blur-md'
@@ -66,12 +83,12 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
         <motion.div 
           variants={itemVariants}           
           className="w-78 h-78 rounded-full flex flex-col items-center justify-center z-10 bg-gradient-to-br from-blue-600 to-cyan-500 shadow-lg shadow-cyan-500/50"
-          onClick={(e) => e.stopPropagation()}
+          onClick={handleCentralClick}
         >
           <h1 className="text-3xl text-center font-bold text-white uppercase tracking-widest px-4">{titulo}</h1>
 
-          {/* NOVO CÓDIGO AQUI: Título secundário condicional */}
-          {titulo === "PROJETOS" && (
+          {/* NOVO CÓDIGO AQUI: O subtítulo agora aparece para PROJETOS OU LICITAÇÃO */}
+          {deveMostrarSubtituloCorporativo && (
             <p className="text-xl text-center font-bold uppercase text-yellow-400 mt-2 border-t pt-2 border-yellow-400/50">
               CORPORATIVO
             </p>
@@ -81,6 +98,7 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
         </motion.div>
 
         {subItens.map((item, index) => {
+          // ... código restante para renderizar subItens
           const anguloGraus = (index * (360 / subItens.length)) + anguloOffset;
           const anguloRadianos = anguloGraus * (Math.PI / 180);
           const x = raioOrbita * Math.cos(anguloRadianos);
