@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick }: Props) {
-  const raioOrbita = 350;
+  const raioOrbita = 360;
   const containerSize = 800;
   const bolaCentralSize = 256;
   const subItemSize = 128;
@@ -81,7 +81,7 @@ export default function DetalheItem({ titulo, subItens, onClose, onSubItemClick 
             <motion.div
               key={item}
               variants={itemVariants}
-              className="absolute w-32 h-32 rounded-full flex items-center justify-center text-center bg-slate-900/80 border-2 border-cyan-400 backdrop-blur-md z-10 cursor-pointer"
+              className="absolute w-38 h-38 rounded-full flex items-center justify-center text-center bg-slate-900/80 border-2 border-cyan-400 backdrop-blur-md z-10 cursor-pointer"
               style={{ top: `calc(50% + ${y}px)`, left: `calc(50% + ${x}px)`, transform: 'translate(-50%, -50%)' }}
               onClick={(e) => {
                 e.stopPropagation();
