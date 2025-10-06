@@ -24,7 +24,7 @@ export const dadosHierarquicos: { [key: string]: string[] } = {
   "VEÍCULOS LEVES": [
     "CORRETORA SEGUROS", "CONSÓRCIO", "CARRO ELÉTRICO", "FIAT",
     "BARTER", "JUINA", "MIT", "CARRO POR ASSINATURA",
-    "PEGEOUT", "E-COMMERCE", "CITROËN",
+    "PEUGEOT", "E-COMMERCE", "CITROËN",
     "CENTRAL SEMINOVOS", "D` PASCHOAL", "LOCADORA"
   ],
   "SERVIÇOS FINANCEIROS": [
