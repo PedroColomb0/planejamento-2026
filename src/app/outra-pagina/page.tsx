@@ -14,6 +14,10 @@ export default function OutraPagina() {
   const [mostrarDetalheCliente, setMostrarDetalheCliente] = useState(false);
   const tempoAnimacao = useRef(useMotionValue(0)).current;
 
+  const handleGoBack = () => {
+  window.location.href = "/tio-chico";
+  };
+
   useEffect(() => {
     const animation = animate(tempoAnimacao, 360, {
       duration: 60,
@@ -67,6 +71,15 @@ export default function OutraPagina() {
         </div>
       </div>
       
+      <div className="absolute bottom-8 left-8 z-50">
+        <button
+          onClick={handleGoBack}
+          className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-bold py-3 px-6 rounded-lg uppercase tracking-wider shadow-lg hover:scale-105 transition-transform duration-300"
+        >
+          Voltar
+        </button>
+      </div>
+
       {/* --- LOGO FIXA --- */}
       <div className="absolute bottom-8 right-8 z-10 w-[240px]">
         <Image src="/Grupo Rovema.png" alt="Logo do Grupo Rovema" width={240} height={66} style={{ objectFit: 'contain' }} />
