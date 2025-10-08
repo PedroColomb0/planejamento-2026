@@ -17,6 +17,10 @@ export default function TioChicoPage() {
     window.location.href = "/outra-pagina";
   };
 
+  const handleGoBack = () => {
+  window.location.href = "/";
+  };
+
   // ALTERAÇÃO AQUI: Substituímos a string 'texto' por um array de blocos.
   // Cada objeto define um trecho de texto e se deve ser formatado.
   const textBlocks: TextBlock[] = [
@@ -169,6 +173,18 @@ export default function TioChicoPage() {
           </button>
         </motion.div>
       </motion.div>
+
+      <div className="absolute bottom-8 left-8 z-10">
+        <button
+          onClick={(e) => {
+            e.stopPropagation(); 
+            handleGoBack();
+          }}
+          className="bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-bold py-3 px-6 rounded-lg uppercase tracking-wider shadow-lg hover:scale-105 transition-transform duration-300"
+        >
+          Voltar
+        </button>
+      </div>
 
       <div className="absolute bottom-8 right-8 z-10 w-[240px]">
         <Image src="/Grupo Rovema.png" alt="Logo do Grupo Rovema" width={240} height={66} style={{ objectFit: 'contain' }} />
